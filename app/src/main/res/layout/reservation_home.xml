@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".reservationHome">
+
+    <Button
+        android:id="@+id/buttonMy"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="My reservation" />
+
+    <Button
+        android:id="@+id/buttonRoom1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Room1" />
+
+    <Button
+        android:id="@+id/buttonRoom2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Room2" />
+
+    <Button
+        android:id="@+id/buttonRoom3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Room3" />
+
+    <Button
+        android:id="@+id/buttonRoom4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Room4" />
+
+    <TextView
+        android:id="@+id/textViewTest1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="30dp"
+        />
+</LinearLayout>

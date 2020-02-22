@@ -1,0 +1,131 @@
+package com.example.test1;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Context;
+import android.os.Bundle;
+import android.widget.ExpandableListView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.TreeMap;
+
+public class myReservation extends AppCompatActivity {
+
+    public static Context mContext;
+
+    FirebaseDatabase firebaseDatabase;
+    DatabaseReference databaseReference;
+    User user;
+    ArrayList<myGroup> DataList;
+    ExpandableListView myList;
+    myGroup temp;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.my_reservation);
+
+        mContext = this;
+
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        databaseReference = firebaseDatabase.getReference();
+
+        user = (User)getIntent().getSerializableExtra("user");
+        myList = (ExpandableListView)findViewById(R.id.mylist);
+        DataList = new ArrayList<myGroup>();
+
+
+        databaseReference.child("Users").child(user.userID).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                User user = dataSnapshot.getValue(User.class);
+
+                TreeMap<String, RData> tm = new TreeMap<String, RData>(user.userRMap);
+
+                Iterator<String> iter = tm.keySet().iterator();
+                while(iter.hasNext()){
+                    //TextView textView = new TextView(myReservation.this);
+                    String key = iter.next();
+                    RData value = user.userRMap.get(key);
+
+                    temp = new myGroup(value.startTime + "-" + value.endTime + "-" + key);
+                    temp.child.add(value.userName  + "-" + value.userID);
+                    DataList.add(temp);
+
+
+                    /*
+                    String S = "start : " + value.startTime + "\n";
+                    S += "end : " + value.endTime + "\n";
+                    S += "Name : " + value.userName + "\n";
+                    S += "ID : " + value.userID + "\n";
+                    textView.setText(S);
+                    textView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,LinearLayout.LayoutParams.WRAP_CONTENT));
+                    textView.setBackgroundResource(R.drawable.back);
+                    textView.setTextSize(26);
+                    linearLayout.addView(textView);*/
+                }
+
+                ExpandAdapter adapter = new ExpandAdapter(getApplicationContext(),R.layout.group_row,R.layout.child_row,DataList);
+                myList.setAdapter(adapter);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    public void reservationDelete(String ID){
+        final String[] SS = ID.split("-");
+        // SS[2] = hashMap ID , SS[3] = userID, SS[2].substring(10) = roomID
+
+        //Toast.makeText(getApplicationContext(),"user : " + SS[3] + "\nhash : " + SS[2] +
+        //        "\nroomID : " + SS[2].substring(10),Toast.LENGTH_LONG).show();
+
+        databaseReference.child("Rooms").child(SS[2].substring(10)).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Room room = dataSnapshot.getValue(Room.class);
+                //Toast.makeText(getApplicationContext(),"Hi : " + room.roomID,Toast.LENGTH_LONG).show();
+                room.roomRMap.remove(SS[2]);
+                databaseReference.child("Rooms").child(room.roomID).setValue(room);
+                room = null;
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        databaseReference.child("Users").child(SS[3]).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                User user = dataSnapshot.getValue(User.class);
+                //Toast.makeText(getApplicationContext(),"Bye : " + user.userID,Toast.LENGTH_LONG).show();
+                user.userRMap.remove(SS[2]);
+                databaseReference.child("Users").child(user.userID).setValue(user);
+                user = null;
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        Toast.makeText(getApplicationContext(),"Delete Complete",Toast.LENGTH_LONG).show();
+    }
+}

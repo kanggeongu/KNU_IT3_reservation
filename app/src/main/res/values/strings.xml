@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Test1</string>
+    <string name="title_activity_succeed">Succeed</string>
 </resources>
