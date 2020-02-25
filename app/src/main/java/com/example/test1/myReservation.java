@@ -17,7 +17,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.TreeMap;
 
@@ -31,6 +33,11 @@ public class myReservation extends AppCompatActivity {
     ArrayList<myGroup> DataList;
     ExpandableListView myList;
     myGroup temp;
+
+    SimpleDateFormat sdfNow = new SimpleDateFormat("yyyyMMddHHmm");
+    long now = System.currentTimeMillis(), t;
+    Date date = new Date(now);
+    String stringNow = sdfNow.format(date);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,18 +63,28 @@ public class myReservation extends AppCompatActivity {
                 User user = dataSnapshot.getValue(User.class);
 
                 TreeMap<String, RData> tm = new TreeMap<String, RData>(user.userRMap);
-
                 Iterator<String> iter = tm.keySet().iterator();
+                ArrayList<String> delKeyList = new ArrayList<>();
                 while(iter.hasNext()){
                     //TextView textView = new TextView(myReservation.this);
                     String key = iter.next();
                     RData value = user.userRMap.get(key);
 
+                    long chk1 = Long.parseLong(value.endTime);
+                    long chk2 = (Long.parseLong(stringNow)-t);
+
+                    if(chk1<chk2){
+                        delKeyList.add(key);
+                        continue;
+                    }
+
                     temp = new myGroup(value.startTime + "-" + value.endTime + "-" + key);
                     temp.child.add(value.userName  + "-" + value.userID);
                     DataList.add(temp);
                 }
-
+                for(String k : delKeyList){
+                    user.userRMap.remove(k);
+                }
                 ExpandAdapter adapter = new ExpandAdapter(getApplicationContext(),R.layout.group_row,R.layout.child_row,DataList);
                 myList.setAdapter(adapter);
             }

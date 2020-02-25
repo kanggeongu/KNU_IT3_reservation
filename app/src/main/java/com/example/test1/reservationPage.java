@@ -191,19 +191,29 @@ public class reservationPage extends AppCompatActivity {
                 boolean flag = true;
                 Room room = dataSnapshot.getValue(Room.class);
                 Iterator<String> iter = room.roomRMap.keySet().iterator();
+                ArrayList<String> delKeyList = new ArrayList<>();
                 while(iter.hasNext()){
                     String key = iter.next();
                     RData value = room.roomRMap.get(key);
                     String rstime = value.startTime, retime = value.endTime;
 
+                    long chk1 = Long.parseLong(rstime)/10000;
+                    long chk2 = (Long.parseLong(stringNow)-temp)/10000;
+
+                    if(chk1<chk2){
+                        delKeyList.add(key);
+                    }
+
                     if(selectedDate <= Long.parseLong(startTime) && Long.parseLong(endTime) <= selectedDate + 10000){
                         if( !(Long.parseLong(retime) <= Long.parseLong(startTime) ||
                                 Long.parseLong(rstime) >= Long.parseLong(endTime))) {
                             flag = false;
-                            break;
                         }
                     }
+                }
 
+                for(String k : delKeyList){
+                    room.roomRMap.remove(k);
                 }
 
                 if(flag)
