@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ExpandableListView;
 import android.widget.LinearLayout;
@@ -37,7 +38,10 @@ public class myReservation extends AppCompatActivity {
         setContentView(R.layout.my_reservation);
 
         mContext = this;
+        init();
+    }
 
+    public void init(){
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference();
 
@@ -62,18 +66,6 @@ public class myReservation extends AppCompatActivity {
                     temp = new myGroup(value.startTime + "-" + value.endTime + "-" + key);
                     temp.child.add(value.userName  + "-" + value.userID);
                     DataList.add(temp);
-
-
-                    /*
-                    String S = "start : " + value.startTime + "\n";
-                    S += "end : " + value.endTime + "\n";
-                    S += "Name : " + value.userName + "\n";
-                    S += "ID : " + value.userID + "\n";
-                    textView.setText(S);
-                    textView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,LinearLayout.LayoutParams.WRAP_CONTENT));
-                    textView.setBackgroundResource(R.drawable.back);
-                    textView.setTextSize(26);
-                    linearLayout.addView(textView);*/
                 }
 
                 ExpandAdapter adapter = new ExpandAdapter(getApplicationContext(),R.layout.group_row,R.layout.child_row,DataList);
@@ -118,6 +110,7 @@ public class myReservation extends AppCompatActivity {
                 user.userRMap.remove(SS[2]);
                 databaseReference.child("Users").child(user.userID).setValue(user);
                 user = null;
+                init();
             }
 
             @Override

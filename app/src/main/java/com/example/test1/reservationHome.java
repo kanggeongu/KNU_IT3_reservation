@@ -20,7 +20,6 @@ public class reservationHome extends AppCompatActivity {
 
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
-    TextView textView;
     String S;
     User user;
     Intent intent;
@@ -36,7 +35,6 @@ public class reservationHome extends AppCompatActivity {
         databaseReference = firebaseDatabase.getReference();
 
         user = (User)getIntent().getSerializableExtra("user");
-        textView = (TextView)findViewById(R.id.textViewTest1);
 
         Button.OnClickListener onClickListener = new Button.OnClickListener(){
 

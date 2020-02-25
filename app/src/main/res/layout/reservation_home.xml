@@ -7,40 +7,94 @@
     android:orientation="vertical"
     tools:context=".reservationHome">
 
-    <Button
-        android:id="@+id/buttonMy"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="My reservation" />
+        android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/buttonRoom1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Room1" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
 
-    <Button
-        android:id="@+id/buttonRoom2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Room2" />
+            <Button
+                android:id="@+id/buttonMy"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="My reservation" />
 
-    <Button
-        android:id="@+id/buttonRoom3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Room3" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
-    <Button
-        android:id="@+id/buttonRoom4"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Room4" />
+                <TextView
+                    android:id="@+id/textView4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="TextView" />
 
-    <TextView
-        android:id="@+id/textViewTest1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="30dp"
-        />
+                <Button
+                    android:id="@+id/buttonRoom1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Room1" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView5"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="TextView" />
+
+                <Button
+                    android:id="@+id/buttonRoom2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Room2" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView6"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="TextView" />
+
+                <Button
+                    android:id="@+id/buttonRoom3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Room3" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView7"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="TextView" />
+
+                <Button
+                    android:id="@+id/buttonRoom4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Room4" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
 </LinearLayout>
