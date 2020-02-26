@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ExpandableListView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -17,7 +18,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.TreeMap;
 
@@ -32,12 +35,19 @@ public class myReservation extends AppCompatActivity {
     ExpandableListView myList;
     myGroup temp;
 
+    SimpleDateFormat sdfNow = new SimpleDateFormat("yyyyMMddHHmm");
+    long now = System.currentTimeMillis(), t;
+    Date date = new Date(now);
+    String stringNow = sdfNow.format(date);
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.my_reservation);
 
         mContext = this;
+        t = 20;
+        t *= 100; t *= 10000; t *= 10000;
         init();
     }
 
@@ -58,15 +68,29 @@ public class myReservation extends AppCompatActivity {
                 TreeMap<String, RData> tm = new TreeMap<String, RData>(user.userRMap);
 
                 Iterator<String> iter = tm.keySet().iterator();
+                ArrayList<String> delKeyList = new ArrayList<>();
                 while(iter.hasNext()){
                     //TextView textView = new TextView(myReservation.this);
                     String key = iter.next();
                     RData value = user.userRMap.get(key);
 
+                    long chk1 = Long.parseLong(value.endTime);
+                    long chk2 = (Long.parseLong(stringNow)-t);
+
+                    if(chk1<chk2){
+                        delKeyList.add(key);
+                        continue;
+                    }
+
                     temp = new myGroup(value.startTime + "-" + value.endTime + "-" + key);
                     temp.child.add(value.userName  + "-" + value.userID);
                     DataList.add(temp);
                 }
+
+                for(String k : delKeyList){
+                    user.userRMap.remove(k);
+                }
+                databaseReference.child("Users").child(user.userID).setValue(user);
 
                 ExpandAdapter adapter = new ExpandAdapter(getApplicationContext(),R.layout.group_row,R.layout.child_row,DataList);
                 myList.setAdapter(adapter);

@@ -56,6 +56,7 @@ public class reservationPage extends AppCompatActivity {
     long now = System.currentTimeMillis();
     Date date = new Date(now);
     String stringNow = sdfNow.format(date);
+    ArrayList<String> delKeyList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,8 +98,6 @@ public class reservationPage extends AppCompatActivity {
 
     public void InitializeOther(){
         setinterval();
-
-
 
         long longNow = Long.parseLong(stringNow);
         long y = longNow/100000000;
@@ -162,15 +161,11 @@ public class reservationPage extends AppCompatActivity {
         ehour = endTimepicker.getCurrentHour();
         emin = endTimepicker.getCurrentMinute();
 
-//        Log.e("???", shour + " : " + smin);
-//        Log.e("???",ehour + " && " + emin);
-
 
         stime = selectedDate+shour*100+(smin % 2==0? 0: 30);
         etime = selectedDate+ehour*100+(emin % 2==0?0:30);
         if(etime == 0) etime = 2400;
 
-        Log.e("time",stime + " : " + etime);
 
         if(stime + temp - Long.parseLong(stringNow)<-30){
             Toast.makeText(this.getApplicationContext(),"start time should be faster than now",Toast.LENGTH_LONG).show();
@@ -191,7 +186,7 @@ public class reservationPage extends AppCompatActivity {
                 boolean flag = true;
                 Room room = dataSnapshot.getValue(Room.class);
                 Iterator<String> iter = room.roomRMap.keySet().iterator();
-                ArrayList<String> delKeyList = new ArrayList<>();
+                delKeyList = new ArrayList<>();
                 while(iter.hasNext()){
                     String key = iter.next();
                     RData value = room.roomRMap.get(key);
@@ -212,9 +207,6 @@ public class reservationPage extends AppCompatActivity {
                     }
                 }
 
-                for(String k : delKeyList){
-                    room.roomRMap.remove(k);
-                }
 
                 if(flag)
                     submit2();
@@ -238,6 +230,10 @@ public class reservationPage extends AppCompatActivity {
         RData rData;
         rData = new RData(startTime, endTime, user.userID,userName);
         room.pushData(room.roomID , rData);
+        for(String k : delKeyList){
+            room.roomRMap.remove(k);
+        }
+
         user.pushData(room.roomID , rData);
         databaseReference.child("Rooms").child(room.roomID).setValue(room);
         databaseReference.child("Users").child(user.userID).setValue(user);
