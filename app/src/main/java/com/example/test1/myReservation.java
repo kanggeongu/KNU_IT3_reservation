@@ -63,6 +63,7 @@ public class myReservation extends AppCompatActivity {
                     String key = iter.next();
                     RData value = user.userRMap.get(key);
 
+
                     temp = new myGroup(value.startTime + "-" + value.endTime + "-" + key);
                     temp.child.add(value.userName  + "-" + value.userID);
                     DataList.add(temp);
