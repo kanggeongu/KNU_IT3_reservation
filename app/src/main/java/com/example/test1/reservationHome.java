@@ -7,15 +7,15 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.ImageView;
-import android.widget.QuickContactBadge;
+import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -47,13 +47,16 @@ public class reservationHome extends AppCompatActivity implements SwipeRefreshLa
     String stringNow = sdfNow.format(date);
     TextView txvDate2;
 
+    LayoutInflater layoutInflater;
+    LinearLayout linearLayoutTextRHome, linearLayoutImageRHome;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.reservation_home);
 
         HomeContext = this;
-        init();
+        initView();
         initializeListener();
         InitializeOther();
     }
@@ -128,8 +131,47 @@ public class reservationHome extends AppCompatActivity implements SwipeRefreshLa
         swipeRefreshLayout.setRefreshing(false);
     }
 
+    public void setLayout(final String roomID){
+        String ltv = "linearLayoutTextRHome"+roomID;
+        String liv = "linearLayoutImageRHome"+roomID;
 
-    public void init(){
+        int ltvID = getResources().getIdentifier(ltv,"id","com.example.test1");
+        int livID = getResources().getIdentifier(liv,"id","com.example.test1");
+
+        linearLayoutTextRHome = (LinearLayout) findViewById(ltvID);
+        linearLayoutImageRHome = (LinearLayout) findViewById(livID);
+
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT
+                ,1f);
+
+        for(int i=9;i<=23;i++){
+            TextView tv = new TextView(this);
+            tv.setText(String.format("%02d", i));
+            tv.setLayoutParams(layoutParams);
+            tv.setGravity(Gravity.CENTER);
+            Drawable drawble = getResources().getDrawable(R.drawable.border);
+            tv.setBackground(drawble);
+            linearLayoutTextRHome.addView(tv);
+        }
+
+        for(int i=9;i<=23;i++){
+            for(int j=0;j<=30;j+=30){
+                ImageView iv = new ImageView(this);
+                iv.setLayoutParams(layoutParams);
+                int k = i*100+j;
+                String temp = "img"+Integer.toString(k)+roomID;
+                int a = getResources().getIdentifier(temp,"id","com.example.test1");
+                iv.setId(a);
+                iv.setImageDrawable(getResources().getDrawable(R.drawable.white));
+                Drawable drawble = getResources().getDrawable(R.drawable.border);
+                iv.setBackground(drawble);
+                linearLayoutImageRHome.addView(iv);
+            }
+        }
+    }
+
+    public void initView(){
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference();
         txvDate2 = (TextView)findViewById(R.id.txvDate2);
@@ -142,6 +184,13 @@ public class reservationHome extends AppCompatActivity implements SwipeRefreshLa
                 android.R.color.holo_red_light
         );
 
+        setLayout("room1");
+        setLayout("room2");
+        setLayout("room3");
+        setLayout("room4");
+        //setLayout("room5");
+
+        layoutInflater = (LayoutInflater)getSystemService(LAYOUT_INFLATER_SERVICE);
         user = (User)getIntent().getSerializableExtra("user");
     }
 

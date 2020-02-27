@@ -7,13 +7,17 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.NumberPicker;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -59,17 +63,57 @@ public class reservationPage extends AppCompatActivity {
     String stringNow = sdfNow.format(date);
     ArrayList<String> delKeyList;
 
+    LayoutInflater layoutInflater;
+    LinearLayout linearLayoutImageRPage, linearLayoutTextRPage;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.reservation_page);
 
-        init();
+        initView();
+        setLayout();
         initializeListener();
         InitializeOther();
     }
 
-    public void init(){
+    public void setLayout(){
+        layoutInflater = (LayoutInflater)getSystemService(LAYOUT_INFLATER_SERVICE);
+
+        linearLayoutImageRPage = (LinearLayout)findViewById(R.id.linearLayoutImageRPage);
+        linearLayoutTextRPage = (LinearLayout)findViewById(R.id.linearLayoutTextRPage);
+
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT
+                ,1f);
+
+        for(int i=9;i<=23;i++){
+            TextView tv = new TextView(this);
+            tv.setText(String.format("%02d", i));
+            tv.setLayoutParams(layoutParams);
+            tv.setGravity(Gravity.CENTER);
+            Drawable drawble = getResources().getDrawable(R.drawable.border);
+            tv.setBackground(drawble);
+            linearLayoutTextRPage.addView(tv);
+        }
+
+        for(int i=9;i<=23;i++){
+            for(int j=0;j<=30;j+=30){
+                ImageView iv = new ImageView(this);
+                iv.setLayoutParams(layoutParams);
+                int k = i*100+j;
+                String temp = "img"+Integer.toString(k);
+                int a = getResources().getIdentifier(temp,"id","com.example.test1");
+                iv.setId(a);
+                iv.setImageDrawable(getResources().getDrawable(R.drawable.white));
+                Drawable drawble = getResources().getDrawable(R.drawable.border);
+                iv.setBackground(drawble);
+                linearLayoutImageRPage.addView(iv);
+            }
+        }
+    }
+
+    public void initView(){
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference();
         user = (User)getIntent().getSerializableExtra("user");
