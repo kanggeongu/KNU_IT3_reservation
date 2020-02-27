@@ -49,7 +49,7 @@ public class reservationPage extends AppCompatActivity {
     private int TIME_PICKER_INTERVAL = 30;
 
     int ny =0, nm=0, nd=0;
-    long selectedDate, temp=0;
+    long selectedDate;
     TextView txvDate;
     TimePicker startTimepicker, endTimepicker;
     DatePickerDialog.OnDateSetListener datePickerListener;
@@ -63,9 +63,6 @@ public class reservationPage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.reservation_page);
-
-        temp = 20;
-        temp *= 100; temp *= 10000; temp *= 10000;
 
         init();
         initializeListener();
@@ -91,6 +88,7 @@ public class reservationPage extends AppCompatActivity {
                 long y = year, m=month+1, d=dayOfMonth;
                 txvDate.setText(y+"년 " + m + "월 " + d + "일");
                 selectedDate = y % 100 * 100000000+m*1000000+d*10000;
+                Log.e("Dateselected Page 94",selectedDate + "");
                 changeImageView();
             }
         };
@@ -105,7 +103,8 @@ public class reservationPage extends AppCompatActivity {
         long d = (longNow%1000000)/10000;
         ny=(int)y; nm=(int)m; nd=(int)d;
         txvDate.setText(y+"년 "+m+"월 "+d+"일");
-        selectedDate = (longNow/10000)*10000 - temp;
+        selectedDate = (longNow/10000)*10000;
+        Log.e("Dateselected Home 110",selectedDate + "");
 
         changeImageView();
     }
@@ -164,15 +163,18 @@ public class reservationPage extends AppCompatActivity {
 
         stime = selectedDate+shour*100+(smin % 2==0? 0: 30);
         etime = selectedDate+ehour*100+(emin % 2==0?0:30);
-        if(etime == 0) etime = 2400;
+        if(etime % 10000 == 0) etime += 2400;
 
-
-        if(stime + temp - Long.parseLong(stringNow)<-30){
+        if(stime + Long.parseLong(stringNow)<-30){
             Toast.makeText(this.getApplicationContext(),"start time should be faster than now",Toast.LENGTH_LONG).show();
             return;
         }
         if(stime>=etime){
             Toast.makeText(this.getApplicationContext(),"start time should be faster than end time",Toast.LENGTH_LONG).show();
+            return;
+        }
+        if(stime % 10000 < 900){
+            Toast.makeText(this.getApplicationContext(),"예약은 9시부터 24시까지 가능합니다.",Toast.LENGTH_LONG).show();
             return;
         }
 
@@ -193,7 +195,7 @@ public class reservationPage extends AppCompatActivity {
                     String rstime = value.startTime, retime = value.endTime;
 
                     long chk1 = Long.parseLong(rstime)/10000;
-                    long chk2 = (Long.parseLong(stringNow)-temp)/10000;
+                    long chk2 = (Long.parseLong(stringNow))/10000;
 
                     if(chk1<chk2){
                         delKeyList.add(key);
@@ -247,6 +249,7 @@ public class reservationPage extends AppCompatActivity {
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        ((reservationHome)reservationHome.HomeContext).onRefresh();
                         finish();
                     }
                 })

@@ -36,7 +36,7 @@ public class myReservation extends AppCompatActivity {
     myGroup temp;
 
     SimpleDateFormat sdfNow = new SimpleDateFormat("yyyyMMddHHmm");
-    long now = System.currentTimeMillis(), t;
+    long now = System.currentTimeMillis();
     Date date = new Date(now);
     String stringNow = sdfNow.format(date);
 
@@ -46,8 +46,6 @@ public class myReservation extends AppCompatActivity {
         setContentView(R.layout.my_reservation);
 
         mContext = this;
-        t = 20;
-        t *= 100; t *= 10000; t *= 10000;
         init();
         func();
     }
@@ -78,7 +76,7 @@ public class myReservation extends AppCompatActivity {
                     RData value = user.userRMap.get(key);
 
                     long chk1 = Long.parseLong(value.endTime);
-                    long chk2 = (Long.parseLong(stringNow)-t);
+                    long chk2 = (Long.parseLong(stringNow));
 
                     if(chk1<chk2){
                         delKeyList.add(key);

@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -28,6 +29,8 @@ import java.util.Iterator;
 
 public class reservationHome extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener {
 
+    public static Context HomeContext;
+
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
     String S;
@@ -36,7 +39,7 @@ public class reservationHome extends AppCompatActivity implements SwipeRefreshLa
     SwipeRefreshLayout swipeRefreshLayout;
 
     int ny =0, nm=0, nd=0;
-    long selectedDate, temp=0;
+    long selectedDate;
     DatePickerDialog.OnDateSetListener datePickerListener;
     SimpleDateFormat sdfNow = new SimpleDateFormat("yyyyMMddHHmm");
     long now = System.currentTimeMillis();
@@ -49,9 +52,7 @@ public class reservationHome extends AppCompatActivity implements SwipeRefreshLa
         super.onCreate(savedInstanceState);
         setContentView(R.layout.reservation_home);
 
-        temp = 20;
-        temp *= 100; temp *= 10000; temp *= 10000;
-
+        HomeContext = this;
         init();
         initializeListener();
         InitializeOther();
@@ -76,16 +77,16 @@ public class reservationHome extends AppCompatActivity implements SwipeRefreshLa
 
         switch (view.getId()){
             case R.id.buttonRoom1:
-                roomId = "room1";
+                roomId = "103";
                 break;
             case R.id.buttonRoom2:
-                roomId = "room2";
+                roomId = "104";
                 break;
             case R.id.buttonRoom3:
-                roomId = "room3";
+                roomId = "106";
                 break;
             case R.id.buttonRoom4:
-                roomId = "room4";
+                roomId = "111";
                 break;
         }
 
@@ -151,12 +152,9 @@ public class reservationHome extends AppCompatActivity implements SwipeRefreshLa
                 ny = year; nm = month+1; nd = dayOfMonth;
                 long y = year, m=month+1, d=dayOfMonth;
                 txvDate2.setText(y+"년 " + m + "월 " + d + "일");
-                selectedDate = y % 100 * 100000000+m*1000000+d*10000;
+                selectedDate = y * 100000000 + m * 1000000 + d * 10000;
 
-                changeImageView("room1");
-                changeImageView("room2");
-                changeImageView("room3");
-                changeImageView("room4");
+                onRefresh();
             }
         };
     }
@@ -168,12 +166,9 @@ public class reservationHome extends AppCompatActivity implements SwipeRefreshLa
         long d = (longNow%1000000)/10000;
         ny=(int)y; nm=(int)m; nd=(int)d;
         txvDate2.setText(y+"년 "+m+"월 "+d+"일");
-        selectedDate = (longNow/10000)*10000 - temp;
+        selectedDate = (longNow/10000)*10000;
 
-        changeImageView("room1");
-        changeImageView("room2");
-        changeImageView("room3");
-        changeImageView("room4");
+        onRefresh();
     }
 
     public void changeImageView(final String roomID){
@@ -186,7 +181,23 @@ public class reservationHome extends AppCompatActivity implements SwipeRefreshLa
             else i+=70;
         }
 
-        databaseReference.child("Rooms").child(roomID).addListenerForSingleValueEvent(new ValueEventListener() {
+        String tempString = null;
+        switch (roomID){
+            case "room1":
+                tempString = "103";
+                break;
+            case "room2":
+                tempString = "104";
+                break;
+            case "room3":
+                tempString = "106";
+                break;
+            case "room4":
+                tempString = "111";
+                break;
+        }
+
+        databaseReference.child("Rooms").child(tempString).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 Room room = dataSnapshot.getValue(Room.class);

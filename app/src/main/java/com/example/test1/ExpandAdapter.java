@@ -64,7 +64,6 @@ public class ExpandAdapter extends BaseExpandableListAdapter {
             @Override
             public void onClick(View v) {
                 ((myReservation)myReservation.mContext).reservationDelete(DataList.get(groupPosition).groupName + "-" + SS[1]);
-                Log.e("What is HashID ? : ",DataList.get(groupPosition).groupName);
             }
         });
 
