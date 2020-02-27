@@ -63,21 +63,20 @@ public class reservationPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.reservation_page);
 
-        firebaseDatabase = FirebaseDatabase.getInstance();
-        databaseReference = firebaseDatabase.getReference();
-
-        user = (User)getIntent().getSerializableExtra("user");
-        room = (Room)getIntent().getSerializableExtra("room");
-
         temp = 20;
         temp *= 100; temp *= 10000; temp *= 10000;
 
-        initializeView();
+        init();
         initializeListener();
         InitializeOther();
     }
 
-    public void initializeView(){
+    public void init(){
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        databaseReference = firebaseDatabase.getReference();
+        user = (User)getIntent().getSerializableExtra("user");
+        room = (Room)getIntent().getSerializableExtra("room");
+
         startTimepicker = (TimePicker)findViewById(R.id.startTimepicker);
         endTimepicker = (TimePicker)findViewById(R.id.endTimepicker);
         txvDate = (TextView)findViewById(R.id.txvDate);

@@ -36,6 +36,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        init();
+        func();
+    }
+
+    public void init(){
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference();
 
@@ -45,8 +50,9 @@ public class MainActivity extends AppCompatActivity {
 
         ImageView imageView = (ImageView)findViewById(R.id.imageView);
         imageView.setImageResource(R.drawable.knu_it3);
+    }
 
-
+    public void func(){
         LoginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

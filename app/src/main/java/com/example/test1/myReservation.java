@@ -49,6 +49,7 @@ public class myReservation extends AppCompatActivity {
         t = 20;
         t *= 100; t *= 10000; t *= 10000;
         init();
+        func();
     }
 
     public void init(){
@@ -58,7 +59,9 @@ public class myReservation extends AppCompatActivity {
         user = (User)getIntent().getSerializableExtra("user");
         myList = (ExpandableListView)findViewById(R.id.mylist);
         DataList = new ArrayList<myGroup>();
+    }
 
+    public void func(){
 
         databaseReference.child("Users").child(user.userID).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
