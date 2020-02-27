@@ -4,457 +4,475 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:orientation="horizontal"
     tools:context=".reservationPage">
 
-    <LinearLayout
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/txvDate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="6"
-            android:gravity="center"/>
-
-        <Button
-            android:id="@+id/btnDatepicker"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="OnClickHandler"
-            android:layout_weight="1"
-            android:text="Date" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/textView0900"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:textAlignment="center"
-            android:background="@drawable/border"
-            android:text="09"
-            android:gravity="center_horizontal" />
-
-        <TextView
-            android:id="@+id/textView1000"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:textAlignment="center"
-            android:background="@drawable/border"
-            android:text="10"
-            android:gravity="center_horizontal" />
-
-        <TextView
-            android:id="@+id/textView1100"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:textAlignment="center"
-            android:background="@drawable/border"
-            android:text="11"
-            android:gravity="center_horizontal" />
-
-        <TextView
-            android:id="@+id/textView1200"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:textAlignment="center"
-            android:background="@drawable/border"
-            android:text="12"
-            android:gravity="center_horizontal" />
-
-        <TextView
-            android:id="@+id/textView1300"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:textAlignment="center"
-            android:background="@drawable/border"
-            android:text="13"
-            android:gravity="center_horizontal" />
-
-        <TextView
-            android:id="@+id/textView1400"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:textAlignment="center"
-            android:background="@drawable/border"
-            android:text="14"
-            android:gravity="center_horizontal" />
-
-        <TextView
-            android:id="@+id/textView1500"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:textAlignment="center"
-            android:background="@drawable/border"
-            android:text="15"
-            android:gravity="center_horizontal" />
-
-        <TextView
-            android:id="@+id/textView1600"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:textAlignment="center"
-            android:background="@drawable/border"
-            android:text="16"
-            android:gravity="center_horizontal" />
-
-        <TextView
-            android:id="@+id/textView1700"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:textAlignment="center"
-            android:background="@drawable/border"
-            android:text="17"
-            android:gravity="center_horizontal" />
-
-        <TextView
-            android:id="@+id/textView1800"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:textAlignment="center"
-            android:background="@drawable/border"
-            android:text="18"
-            android:gravity="center_horizontal" />
-
-        <TextView
-            android:id="@+id/textView1900"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:textAlignment="center"
-            android:background="@drawable/border"
-            android:text="19"
-            android:gravity="center_horizontal" />
-        <TextView
-            android:id="@+id/textView2000"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:textAlignment="center"
-            android:background="@drawable/border"
-            android:text="20"
-            android:gravity="center_horizontal" />
-        <TextView
-            android:id="@+id/textView2100"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:textAlignment="center"
-            android:background="@drawable/border"
-            android:text="21"
-            android:gravity="center_horizontal" />
-        <TextView
-            android:id="@+id/textView2200"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:textAlignment="center"
-            android:background="@drawable/border"
-            android:text="22"
-            android:gravity="center_horizontal" />
-        <TextView
-            android:id="@+id/textView2300"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:textAlignment="center"
-            android:background="@drawable/border"
-            android:text="23"
-            android:gravity="center_horizontal" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <ImageView
-            android:id="@+id/img900"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            app:srcCompat="@drawable/white" />
-
-        <ImageView
-            android:id="@+id/img930"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            app:srcCompat="@drawable/white" />
-
-        <ImageView
-            android:id="@+id/img1000"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            app:srcCompat="@drawable/white" />
-
-        <ImageView
-            android:id="@+id/img1030"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            app:srcCompat="@drawable/white" />
-
-        <ImageView
-            android:id="@+id/img1100"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            app:srcCompat="@drawable/white" />
-
-        <ImageView
-            android:id="@+id/img1130"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            app:srcCompat="@drawable/white" />
-
-        <ImageView
-            android:id="@+id/img1200"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            app:srcCompat="@drawable/white" />
-
-        <ImageView
-            android:id="@+id/img1230"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            app:srcCompat="@drawable/white" />
-
-        <ImageView
-            android:id="@+id/img1300"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            app:srcCompat="@drawable/white" />
-
-        <ImageView
-            android:id="@+id/img1330"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            app:srcCompat="@drawable/white" />
-
-        <ImageView
-            android:id="@+id/img1400"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            app:srcCompat="@drawable/white" />
-
-        <ImageView
-            android:id="@+id/img1430"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            app:srcCompat="@drawable/white" />
-
-        <ImageView
-            android:id="@+id/img1500"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            app:srcCompat="@drawable/white" />
-
-        <ImageView
-            android:id="@+id/img1530"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            app:srcCompat="@drawable/white" />
-
-        <ImageView
-            android:id="@+id/img1600"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            app:srcCompat="@drawable/white" />
-
-        <ImageView
-            android:id="@+id/img1630"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            app:srcCompat="@drawable/white" />
-
-        <ImageView
-            android:id="@+id/img1700"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            app:srcCompat="@drawable/white" />
-
-        <ImageView
-            android:id="@+id/img1730"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            app:srcCompat="@drawable/white" />
-
-        <ImageView
-            android:id="@+id/img1800"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            app:srcCompat="@drawable/white" />
-
-        <ImageView
-            android:id="@+id/img1830"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            app:srcCompat="@drawable/white" />
-
-        <ImageView
-            android:id="@+id/img1900"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            app:srcCompat="@drawable/white" />
-
-        <ImageView
-            android:id="@+id/img1930"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            app:srcCompat="@drawable/white" />
-
-        <ImageView
-            android:id="@+id/img2000"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            app:srcCompat="@drawable/white" />
-
-        <ImageView
-            android:id="@+id/img2030"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            app:srcCompat="@drawable/white" />
-
-        <ImageView
-            android:id="@+id/img2100"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            app:srcCompat="@drawable/white" />
-
-        <ImageView
-            android:id="@+id/img2130"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            app:srcCompat="@drawable/white" />
-
-        <ImageView
-            android:id="@+id/img2200"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            app:srcCompat="@drawable/white" />
-
-        <ImageView
-            android:id="@+id/img2230"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            app:srcCompat="@drawable/white" />
-
-        <ImageView
-            android:id="@+id/img2300"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            app:srcCompat="@drawable/white" />
-
-        <ImageView
-            android:id="@+id/img2330"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            app:srcCompat="@drawable/white" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/textView12"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="Start Time" />
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/textView13"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="End Time" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
-    </LinearLayout>
+                <TextView
+                    android:id="@+id/txvDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="6"
+                    android:gravity="center" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+                <Button
+                    android:id="@+id/btnDatepicker"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:onClick="OnClickHandler"
+                    android:text="Date" />
+            </LinearLayout>
 
-        <TimePicker
-            android:id="@+id/startTimepicker"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:timePickerMode="spinner" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
-        <TimePicker
-            android:id="@+id/endTimepicker"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:timePickerMode="spinner" />
+                <TextView
+                    android:id="@+id/textView0900"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/border"
+                    android:gravity="center_horizontal"
+                    android:text="09"
+                    android:textAlignment="center" />
 
-    </LinearLayout>
+                <TextView
+                    android:id="@+id/textView1000"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/border"
+                    android:gravity="center_horizontal"
+                    android:text="10"
+                    android:textAlignment="center" />
 
-    <EditText
-        android:id="@+id/editTextUserName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:hint="Name : "/>
+                <TextView
+                    android:id="@+id/textView1100"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/border"
+                    android:gravity="center_horizontal"
+                    android:text="11"
+                    android:textAlignment="center" />
 
-    <Button
-        android:id="@+id/buttonReservation"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:onClick="OnClickHandler"
-        android:text="Reservation" />
+                <TextView
+                    android:id="@+id/textView1200"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/border"
+                    android:gravity="center_horizontal"
+                    android:text="12"
+                    android:textAlignment="center" />
+
+                <TextView
+                    android:id="@+id/textView1300"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/border"
+                    android:gravity="center_horizontal"
+                    android:text="13"
+                    android:textAlignment="center" />
+
+                <TextView
+                    android:id="@+id/textView1400"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/border"
+                    android:gravity="center_horizontal"
+                    android:text="14"
+                    android:textAlignment="center" />
+
+                <TextView
+                    android:id="@+id/textView1500"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/border"
+                    android:gravity="center_horizontal"
+                    android:text="15"
+                    android:textAlignment="center" />
+
+                <TextView
+                    android:id="@+id/textView1600"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/border"
+                    android:gravity="center_horizontal"
+                    android:text="16"
+                    android:textAlignment="center" />
+
+                <TextView
+                    android:id="@+id/textView1700"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/border"
+                    android:gravity="center_horizontal"
+                    android:text="17"
+                    android:textAlignment="center" />
+
+                <TextView
+                    android:id="@+id/textView1800"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/border"
+                    android:gravity="center_horizontal"
+                    android:text="18"
+                    android:textAlignment="center" />
+
+                <TextView
+                    android:id="@+id/textView1900"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/border"
+                    android:gravity="center_horizontal"
+                    android:text="19"
+                    android:textAlignment="center" />
+
+                <TextView
+                    android:id="@+id/textView2000"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/border"
+                    android:gravity="center_horizontal"
+                    android:text="20"
+                    android:textAlignment="center" />
+
+                <TextView
+                    android:id="@+id/textView2100"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/border"
+                    android:gravity="center_horizontal"
+                    android:text="21"
+                    android:textAlignment="center" />
+
+                <TextView
+                    android:id="@+id/textView2200"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/border"
+                    android:gravity="center_horizontal"
+                    android:text="22"
+                    android:textAlignment="center" />
+
+                <TextView
+                    android:id="@+id/textView2300"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/border"
+                    android:gravity="center_horizontal"
+                    android:text="23"
+                    android:textAlignment="center" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/img900"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:srcCompat="@drawable/white" />
+
+                <ImageView
+                    android:id="@+id/img930"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:srcCompat="@drawable/white" />
+
+                <ImageView
+                    android:id="@+id/img1000"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:srcCompat="@drawable/white" />
+
+                <ImageView
+                    android:id="@+id/img1030"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:srcCompat="@drawable/white" />
+
+                <ImageView
+                    android:id="@+id/img1100"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:srcCompat="@drawable/white" />
+
+                <ImageView
+                    android:id="@+id/img1130"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:srcCompat="@drawable/white" />
+
+                <ImageView
+                    android:id="@+id/img1200"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:srcCompat="@drawable/white" />
+
+                <ImageView
+                    android:id="@+id/img1230"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:srcCompat="@drawable/white" />
+
+                <ImageView
+                    android:id="@+id/img1300"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:srcCompat="@drawable/white" />
+
+                <ImageView
+                    android:id="@+id/img1330"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:srcCompat="@drawable/white" />
+
+                <ImageView
+                    android:id="@+id/img1400"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:srcCompat="@drawable/white" />
+
+                <ImageView
+                    android:id="@+id/img1430"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:srcCompat="@drawable/white" />
+
+                <ImageView
+                    android:id="@+id/img1500"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:srcCompat="@drawable/white" />
+
+                <ImageView
+                    android:id="@+id/img1530"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:srcCompat="@drawable/white" />
+
+                <ImageView
+                    android:id="@+id/img1600"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:srcCompat="@drawable/white" />
+
+                <ImageView
+                    android:id="@+id/img1630"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:srcCompat="@drawable/white" />
+
+                <ImageView
+                    android:id="@+id/img1700"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:srcCompat="@drawable/white" />
+
+                <ImageView
+                    android:id="@+id/img1730"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:srcCompat="@drawable/white" />
+
+                <ImageView
+                    android:id="@+id/img1800"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:srcCompat="@drawable/white" />
+
+                <ImageView
+                    android:id="@+id/img1830"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:srcCompat="@drawable/white" />
+
+                <ImageView
+                    android:id="@+id/img1900"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:srcCompat="@drawable/white" />
+
+                <ImageView
+                    android:id="@+id/img1930"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:srcCompat="@drawable/white" />
+
+                <ImageView
+                    android:id="@+id/img2000"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:srcCompat="@drawable/white" />
+
+                <ImageView
+                    android:id="@+id/img2030"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:srcCompat="@drawable/white" />
+
+                <ImageView
+                    android:id="@+id/img2100"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:srcCompat="@drawable/white" />
+
+                <ImageView
+                    android:id="@+id/img2130"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:srcCompat="@drawable/white" />
+
+                <ImageView
+                    android:id="@+id/img2200"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:srcCompat="@drawable/white" />
+
+                <ImageView
+                    android:id="@+id/img2230"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:srcCompat="@drawable/white" />
+
+                <ImageView
+                    android:id="@+id/img2300"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:srcCompat="@drawable/white" />
+
+                <ImageView
+                    android:id="@+id/img2330"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:srcCompat="@drawable/white" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TimePicker
+                    android:id="@+id/startTimepicker"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:timePickerMode="spinner" />
+
+                <TimePicker
+                    android:id="@+id/endTimepicker"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:timePickerMode="spinner" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView12"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="Start Time" />
+
+                <TextView
+                    android:id="@+id/textView13"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="End Time" />
+
+            </LinearLayout>
+
+            <EditText
+                android:id="@+id/editTextUserName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:ems="10"
+                android:hint="Name"
+                android:inputType="textPersonName" />
+
+            <Button
+                android:id="@+id/buttonReservation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="OnClickHandler"
+                android:text="Reservation" />
+
+        </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>
