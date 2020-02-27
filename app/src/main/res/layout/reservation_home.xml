@@ -30,10 +30,10 @@
                     <Button
                         android:id="@+id/buttonMy"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:layout_weight="2"
                         android:onClick="onClickHandlerReservationHome1"
-                        android:text="나의 예약현황" />
+                        android:text="내 예약" />
 
                     <TextView
                         android:id="@+id/txvDate2"
@@ -56,6 +56,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:background="@drawable/layoutborder"
                     android:orientation="vertical">
 
                     <LinearLayout
@@ -84,7 +85,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
-                            android:orientation="horizontal"/>
+                            android:orientation="horizontal" />
 
                     </LinearLayout>
 
@@ -100,7 +101,7 @@
                         android:id="@+id/linearLayoutImageRHomeroom1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"/>
+                        android:orientation="horizontal" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -111,7 +112,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
-                            android:orientation="horizontal"/>
+                            android:orientation="horizontal" />
 
                         <Button
                             android:id="@+id/buttonRoom1"
@@ -125,7 +126,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
-                            android:orientation="horizontal"/>
+                            android:orientation="horizontal" />
                     </LinearLayout>
 
                 </LinearLayout>
@@ -133,6 +134,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="@drawable/layoutborder"
                     android:orientation="vertical">
 
                     <LinearLayout
@@ -207,6 +209,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="@drawable/layoutborder"
                     android:orientation="vertical">
 
                     <LinearLayout
@@ -235,7 +238,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
-                            android:orientation="horizontal"/>
+                            android:orientation="horizontal" />
 
                     </LinearLayout>
 
@@ -243,13 +246,13 @@
                         android:id="@+id/linearLayoutTextRHomeroom3"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:orientation="horizontal"/>
+                        android:orientation="horizontal" />
 
                     <LinearLayout
                         android:id="@+id/linearLayoutImageRHomeroom3"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:orientation="horizontal"/>
+                        android:orientation="horizontal" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -260,7 +263,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
-                            android:orientation="horizontal"/>
+                            android:orientation="horizontal" />
 
                         <Button
                             android:id="@+id/buttonRoom3"
@@ -274,13 +277,14 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
-                            android:orientation="horizontal"/>
+                            android:orientation="horizontal" />
                     </LinearLayout>
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="@drawable/layoutborder"
                     android:orientation="vertical">
 
                     <LinearLayout
@@ -309,7 +313,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
-                            android:orientation="horizontal"/>
+                            android:orientation="horizontal" />
 
                     </LinearLayout>
 
@@ -317,13 +321,13 @@
                         android:id="@+id/linearLayoutTextRHomeroom4"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:orientation="horizontal"/>
+                        android:orientation="horizontal" />
 
                     <LinearLayout
                         android:id="@+id/linearLayoutImageRHomeroom4"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:orientation="horizontal"/>
+                        android:orientation="horizontal" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -334,7 +338,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
-                            android:orientation="horizontal"/>
+                            android:orientation="horizontal" />
 
                         <Button
                             android:id="@+id/buttonRoom4"
@@ -348,7 +352,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
-                            android:orientation="horizontal"/>
+                            android:orientation="horizontal" />
                     </LinearLayout>
 
                 </LinearLayout>
@@ -356,6 +360,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:background="@drawable/layoutborder"
                     android:orientation="vertical">
 
                     <LinearLayout
@@ -384,7 +389,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
-                            android:orientation="horizontal"/>
+                            android:orientation="horizontal" />
 
                     </LinearLayout>
 
@@ -392,13 +397,13 @@
                         android:id="@+id/linearLayoutTextRHomeroom5"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:orientation="horizontal"/>
+                        android:orientation="horizontal" />
 
                     <LinearLayout
                         android:id="@+id/linearLayoutImageRHomeroom5"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:orientation="horizontal"/>
+                        android:orientation="horizontal" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -409,7 +414,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
-                            android:orientation="horizontal"/>
+                            android:orientation="horizontal" />
 
                         <Button
                             android:id="@+id/buttonRoom5"
@@ -423,7 +428,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
-                            android:orientation="horizontal"/>
+                            android:orientation="horizontal" />
                     </LinearLayout>
 
                 </LinearLayout>
