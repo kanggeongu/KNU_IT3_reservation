@@ -2,6 +2,7 @@ package com.example.test1;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
@@ -25,13 +26,14 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Iterator;
 
-public class reservationHome extends AppCompatActivity {
+public class reservationHome extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener {
 
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
     String S;
     User user;
     Intent intent;
+    SwipeRefreshLayout swipeRefreshLayout;
 
     int ny =0, nm=0, nd=0;
     long selectedDate, temp=0;
@@ -46,7 +48,6 @@ public class reservationHome extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.reservation_home);
-
 
         temp = 20;
         temp *= 100; temp *= 10000; temp *= 10000;
@@ -108,8 +109,6 @@ public class reservationHome extends AppCompatActivity {
 
                     }
                 });
-
-
             }
 
             @Override
@@ -119,10 +118,28 @@ public class reservationHome extends AppCompatActivity {
         });
     }
 
+    @Override
+    public void onRefresh() {
+        changeImageView("room1");
+        changeImageView("room2");
+        changeImageView("room3");
+        changeImageView("room4");
+        swipeRefreshLayout.setRefreshing(false);
+    }
+
+
     public void init(){
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference();
         txvDate2 = (TextView)findViewById(R.id.txvDate2);
+        swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipeLayout);
+        swipeRefreshLayout.setOnRefreshListener(this);
+        swipeRefreshLayout.setColorSchemeResources(
+                android.R.color.holo_blue_bright,
+                android.R.color.holo_green_light,
+                android.R.color.holo_orange_light,
+                android.R.color.holo_red_light
+        );
 
         user = (User)getIntent().getSerializableExtra("user");
     }
