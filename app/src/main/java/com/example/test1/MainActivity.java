@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
         LoginButton=(Button)findViewById(R.id.LoginButton);
 
         ImageView imageView = (ImageView)findViewById(R.id.imageView);
-        imageView.setImageResource(R.drawable.knu_it3);
+        imageView.setImageResource(R.drawable.knu);
     }
 
     public void func(){
