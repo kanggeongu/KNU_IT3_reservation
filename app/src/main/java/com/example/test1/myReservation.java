@@ -56,7 +56,6 @@ public class myReservation extends AppCompatActivity {
 
         user = (User)getIntent().getSerializableExtra("user");
         myList = (ExpandableListView)findViewById(R.id.mylist);
-        DataList = new ArrayList<myGroup>();
     }
 
     public void func(){
@@ -67,9 +66,10 @@ public class myReservation extends AppCompatActivity {
                 User user = dataSnapshot.getValue(User.class);
 
                 TreeMap<String, RData> tm = new TreeMap<String, RData>(user.userRMap);
-
                 Iterator<String> iter = tm.keySet().iterator();
                 ArrayList<String> delKeyList = new ArrayList<>();
+                DataList = new ArrayList<myGroup>();
+
                 while(iter.hasNext()){
                     //TextView textView = new TextView(myReservation.this);
                     String key = iter.next();
@@ -106,12 +106,10 @@ public class myReservation extends AppCompatActivity {
 
     public void reservationDelete(String ID){
         final String[] SS = ID.split("-");
-        // SS[2] = hashMap ID , SS[3] = userID, SS[2].substring(10) = roomID
+        Log.e("myReservation",ID);
+        // SS[0] = startTIme, SS[1] = endTime, SS[2] = hashID, SS[3] = userID
 
-        //Toast.makeText(getApplicationContext(),"user : " + SS[3] + "\nhash : " + SS[2] +
-        //        "\nroomID : " + SS[2].substring(10),Toast.LENGTH_LONG).show();
-
-        databaseReference.child("Rooms").child(SS[2].substring(10)).addListenerForSingleValueEvent(new ValueEventListener() {
+        databaseReference.child("Rooms").child(SS[2].substring(12)).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 Room room = dataSnapshot.getValue(Room.class);
@@ -135,7 +133,8 @@ public class myReservation extends AppCompatActivity {
                 user.userRMap.remove(SS[2]);
                 databaseReference.child("Users").child(user.userID).setValue(user);
                 user = null;
-                init();
+                func();
+                ((reservationHome)reservationHome.HomeContext).onRefresh();
             }
 
             @Override

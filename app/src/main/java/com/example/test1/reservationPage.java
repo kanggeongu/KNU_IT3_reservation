@@ -273,6 +273,11 @@ public class reservationPage extends AppCompatActivity {
         editTextUserName = (EditText)findViewById(R.id.editTextUserName);
         String userName = editTextUserName.getText().toString();
 
+        if(userName.equals("")){
+            Toast.makeText(getApplicationContext(),"이름을 입력하세요",Toast.LENGTH_LONG).show();
+            return;
+        }
+
         RData rData;
         rData = new RData(startTime, endTime, user.userID,userName);
         room.pushData(room.roomID , rData);
