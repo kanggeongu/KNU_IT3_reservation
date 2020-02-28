@@ -224,4 +224,49 @@
 
     <item name="img2300room4" type="id"/>
     <item name="img2330room4" type="id"/>
+
+    <item name="img900room5" type="id"/>
+    <item name="img930room5" type="id"/>
+
+    <item name="img1000room5" type="id"/>
+    <item name="img1030room5" type="id"/>
+
+    <item name="img1100room5" type="id"/>
+    <item name="img1130room5" type="id"/>
+
+    <item name="img1200room5" type="id"/>
+    <item name="img1230room5" type="id"/>
+
+    <item name="img1300room5" type="id"/>
+    <item name="img1330room5" type="id"/>
+
+    <item name="img1400room5" type="id"/>
+    <item name="img1430room5" type="id"/>
+
+    <item name="img1500room5" type="id"/>
+    <item name="img1530room5" type="id"/>
+
+    <item name="img1600room5" type="id"/>
+    <item name="img1630room5" type="id"/>
+
+    <item name="img1700room5" type="id"/>
+    <item name="img1730room5" type="id"/>
+
+    <item name="img1800room5" type="id"/>
+    <item name="img1830room5" type="id"/>
+
+    <item name="img1900room5" type="id"/>
+    <item name="img1930room5" type="id"/>
+
+    <item name="img2000room5" type="id"/>
+    <item name="img2030room5" type="id"/>
+
+    <item name="img2100room5" type="id"/>
+    <item name="img2130room5" type="id"/>
+
+    <item name="img2200room5" type="id"/>
+    <item name="img2230room5" type="id"/>
+
+    <item name="img2300room5" type="id"/>
+    <item name="img2330room5" type="id"/>
 </resources>
