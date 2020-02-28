@@ -39,10 +39,7 @@ import java.util.Iterator;
 import java.util.List;
 
 public class reservationPage extends AppCompatActivity {
-
-    TextView textView;
-    EditText editTextStartTime, editTextEndTime, editTextUserName;
-    Button buttonReservation;
+    EditText editTextUserName;
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
     User user;
@@ -209,7 +206,6 @@ public class reservationPage extends AppCompatActivity {
         ehour = endTimepicker.getCurrentHour();
         emin = endTimepicker.getCurrentMinute();
 
-
         stime = selectedDate+shour*100+(smin % 2==0? 0: 30);
         etime = selectedDate+ehour*100+(emin % 2==0?0:30);
         if(etime % 10000 == 0) etime += 2400;
@@ -257,8 +253,6 @@ public class reservationPage extends AppCompatActivity {
                         }
                     }
                 }
-
-
                 if(flag)
                     submit2();
                 else
@@ -352,6 +346,4 @@ public class reservationPage extends AppCompatActivity {
             }
         });
     }
-
-
 }
