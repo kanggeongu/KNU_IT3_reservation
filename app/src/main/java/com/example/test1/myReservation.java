@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.ViewGroup;
 import android.widget.ExpandableListView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -76,6 +77,7 @@ public class myReservation extends AppCompatActivity {
                 ArrayList<String> delKeyList = new ArrayList<>();
                 DataList = new ArrayList<myGroup>();
 
+                boolean flag = false;
                 while(iter.hasNext()){
                     //TextView textView = new TextView(myReservation.this);
                     String key = iter.next();
@@ -92,6 +94,7 @@ public class myReservation extends AppCompatActivity {
                     temp = new myGroup(value.startTime + "-" + value.endTime + "-" + key);
                     temp.child.add(value.userName  + "-" + value.userID);
                     DataList.add(temp);
+                    flag = true;
                 }
 
                 for(String k : delKeyList){
@@ -101,6 +104,16 @@ public class myReservation extends AppCompatActivity {
 
                 ExpandAdapter adapter = new ExpandAdapter(getApplicationContext(),R.layout.group_row,R.layout.child_row,DataList);
                 myList.setAdapter(adapter);
+
+                if(!flag){
+                    LinearLayout topLayout = (LinearLayout)findViewById(R.id.linear1);
+                    TextView textViewempty = new TextView(myReservation.this);
+                    textViewempty.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
+                            LinearLayout.LayoutParams.WRAP_CONTENT));
+                    textViewempty.setTextSize(30);
+                    textViewempty.setText("예약 정보가 없습니다.");
+                    topLayout.addView(textViewempty);
+                }
             }
 
             @Override
