@@ -7,7 +7,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ExpandableListView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -27,19 +29,16 @@ import java.util.TreeMap;
 
 public class myReservation extends AppCompatActivity {
 
-    public static Context mContext;
-
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
     User user;
-    ArrayList<myGroup> DataList;
-    ExpandableListView myList;
-    myGroup temp;
 
     SimpleDateFormat sdfNow = new SimpleDateFormat("yyyyMMddHHmm");
     long now = System.currentTimeMillis();
     Date date = new Date(now);
     String stringNow = sdfNow.format(date);
+
+    LinearLayout topLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +46,6 @@ public class myReservation extends AppCompatActivity {
         setContentView(R.layout.my_reservation);
 
         startLoading();
-        mContext = this;
         init();
         func();
     }
@@ -62,10 +60,11 @@ public class myReservation extends AppCompatActivity {
         databaseReference = firebaseDatabase.getReference();
 
         user = (User)getIntent().getSerializableExtra("user");
-        myList = (ExpandableListView)findViewById(R.id.mylist);
     }
 
     public void func(){
+        topLayout = (LinearLayout)findViewById(R.id.linear1);
+        topLayout.removeAllViews();
 
         databaseReference.child("Users").child(user.userID).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -75,11 +74,9 @@ public class myReservation extends AppCompatActivity {
                 TreeMap<String, RData> tm = new TreeMap<String, RData>(user.userRMap);
                 Iterator<String> iter = tm.keySet().iterator();
                 ArrayList<String> delKeyList = new ArrayList<>();
-                DataList = new ArrayList<myGroup>();
 
                 boolean flag = false;
                 while(iter.hasNext()){
-                    //TextView textView = new TextView(myReservation.this);
                     String key = iter.next();
                     RData value = user.userRMap.get(key);
 
@@ -91,10 +88,8 @@ public class myReservation extends AppCompatActivity {
                         continue;
                     }
 
-                    temp = new myGroup(value.startTime + "-" + value.endTime + "-" + key);
-                    temp.child.add(value.userName  + "-" + value.userID);
-                    DataList.add(temp);
                     flag = true;
+                    ListView(key, value);
                 }
 
                 for(String k : delKeyList){
@@ -102,17 +97,9 @@ public class myReservation extends AppCompatActivity {
                 }
                 databaseReference.child("Users").child(user.userID).setValue(user);
 
-                ExpandAdapter adapter = new ExpandAdapter(getApplicationContext(),R.layout.group_row,R.layout.child_row,DataList);
-                myList.setAdapter(adapter);
 
                 if(!flag){
-                    LinearLayout topLayout = (LinearLayout)findViewById(R.id.linear1);
-                    TextView textViewempty = new TextView(myReservation.this);
-                    textViewempty.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
-                            LinearLayout.LayoutParams.WRAP_CONTENT));
-                    textViewempty.setTextSize(30);
-                    textViewempty.setText("예약 정보가 없습니다.");
-                    topLayout.addView(textViewempty);
+                    EmptyView();
                 }
             }
 
@@ -123,17 +110,74 @@ public class myReservation extends AppCompatActivity {
         });
     }
 
-    public void reservationDelete(String ID){
-        final String[] SS = ID.split("-");
-        Log.e("myReservation",ID);
-        // SS[0] = startTIme, SS[1] = endTime, SS[2] = hashID, SS[3] = userID
+    public void EmptyView(){
+        TextView textViewEmpty = new TextView(myReservation.this);
+        textViewEmpty.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT));
+        textViewEmpty.setTextSize(30);
+        textViewEmpty.setText("예약 정보가 없습니다.");
+        topLayout.addView(textViewEmpty);
+    }
 
-        databaseReference.child("Rooms").child(SS[2].substring(12)).addListenerForSingleValueEvent(new ValueEventListener() {
+    public void ListView(String roomID, RData rData){
+        attachRoom(roomID.substring(12));
+        attachTimeTable();
+        attachUser(rData.userName, rData.userID);
+        attachTime(rData.startTime, rData.endTime);
+        attachDeleteButton(roomID, rData);
+    }
+
+    public void attachRoom(String roomID){
+        TextView textViewRoom = new TextView(myReservation.this);
+        textViewRoom.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT));
+        textViewRoom.setText("방 : " + roomID);
+        topLayout.addView(textViewRoom);
+    }
+
+    public void attachTimeTable(){
+
+    }
+
+    public void attachUser(String userName, String userID){
+        TextView textViewUser = new TextView(myReservation.this);
+        textViewUser.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT));
+        textViewUser.setText("이름 : " + userName + " / 아이디 : " + userID);
+        topLayout.addView(textViewUser);
+    }
+
+    public void attachTime(String startTime, String endTime){
+        TextView textViewTime = new TextView(myReservation.this);
+        textViewTime.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT));
+        textViewTime.setText("예약시간 : " + startTime + " ~ " + endTime);
+        topLayout.addView(textViewTime);
+    }
+
+    public void attachDeleteButton(final String key, final RData rData){
+        Button buttonDel = new Button(myReservation.this);
+        buttonDel.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT));
+        buttonDel.setText("삭제");
+        buttonDel.setBackgroundResource(R.drawable.blank);
+        buttonDel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                reservationDelete(key, rData);
+            }
+        });
+        topLayout.addView(buttonDel);
+    }
+
+
+    public void reservationDelete(final String roomID, RData rData){
+        databaseReference.child("Rooms").child(roomID.substring(12)).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 Room room = dataSnapshot.getValue(Room.class);
                 //Toast.makeText(getApplicationContext(),"Hi : " + room.roomID,Toast.LENGTH_LONG).show();
-                room.roomRMap.remove(SS[2]);
+                room.roomRMap.remove(roomID);
                 databaseReference.child("Rooms").child(room.roomID).setValue(room);
                 room = null;
             }
@@ -144,12 +188,12 @@ public class myReservation extends AppCompatActivity {
             }
         });
 
-        databaseReference.child("Users").child(SS[3]).addListenerForSingleValueEvent(new ValueEventListener() {
+        databaseReference.child("Users").child(rData.userID).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 User user = dataSnapshot.getValue(User.class);
                 //Toast.makeText(getApplicationContext(),"Bye : " + user.userID,Toast.LENGTH_LONG).show();
-                user.userRMap.remove(SS[2]);
+                user.userRMap.remove(roomID);
                 databaseReference.child("Users").child(user.userID).setValue(user);
                 user = null;
                 func();

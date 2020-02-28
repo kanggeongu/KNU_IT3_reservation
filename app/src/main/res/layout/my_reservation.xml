@@ -6,12 +6,4 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:id="@+id/linear1"
-    tools:context=".myReservation">
-
-    <ExpandableListView
-        android:id="@+id/mylist"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:indicatorLeft="?android:attr/expandableListPreferredItemIndicatorLeft"></ExpandableListView>
-
-</LinearLayout>
+    tools:context=".myReservation"/>
