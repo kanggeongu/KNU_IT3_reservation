@@ -9,6 +9,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -62,6 +63,11 @@ public class reservationHome extends AppCompatActivity implements SwipeRefreshLa
         InitializeOther();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
     public void startLoading(){
         Intent intent = new Intent(getApplicationContext(),Loading.class);
         startActivity(intent);
@@ -96,6 +102,9 @@ public class reservationHome extends AppCompatActivity implements SwipeRefreshLa
                 break;
             case R.id.buttonRoom4:
                 roomId = "111";
+                break;
+            case R.id.buttonRoom5:
+                roomId = "413";
                 break;
         }
 
@@ -134,6 +143,7 @@ public class reservationHome extends AppCompatActivity implements SwipeRefreshLa
         changeImageView("room2");
         changeImageView("room3");
         changeImageView("room4");
+        changeImageView("room5");
         swipeRefreshLayout.setRefreshing(false);
     }
 
@@ -194,7 +204,7 @@ public class reservationHome extends AppCompatActivity implements SwipeRefreshLa
         setLayout("room2");
         setLayout("room3");
         setLayout("room4");
-        //setLayout("room5");
+        setLayout("room5");
 
         layoutInflater = (LayoutInflater)getSystemService(LAYOUT_INFLATER_SERVICE);
         user = (User)getIntent().getSerializableExtra("user");
@@ -227,6 +237,8 @@ public class reservationHome extends AppCompatActivity implements SwipeRefreshLa
     }
 
     public void changeImageView(final String roomID){
+
+        Log.e("HomeroomID : ", roomID);
         for(int i=900;i<=2330;){
             String temp = "img"+Long.toString(i)+roomID;
             int k = getResources().getIdentifier(temp,"id","com.example.test1");
@@ -250,8 +262,12 @@ public class reservationHome extends AppCompatActivity implements SwipeRefreshLa
             case "room4":
                 tempString = "111";
                 break;
+            case "room5":
+                tempString = "413";
+                break;
         }
 
+        Log.e("HometempString : ", tempString);
         databaseReference.child("Rooms").child(tempString).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -261,12 +277,16 @@ public class reservationHome extends AppCompatActivity implements SwipeRefreshLa
                     String key = iter.next();
                     RData value = room.roomRMap.get(key);
                     String rstime = value.startTime, retime = value.endTime;
+                    Log.e("HomeTime",rstime + " : " + retime);
 
                     if(selectedDate <= Long.parseLong(rstime) && Long.parseLong(retime) < selectedDate + 10000){
                         long tempStart = Long.parseLong(rstime) % 10000;
                         long tempEnd = Long.parseLong(retime) % 10000;
+
+                        Log.e("HomeStart~End",tempStart + " : " + tempEnd);
                         for(long i=tempStart;i<tempEnd;){
                             String temp = "img"+Long.toString(i)+ roomID;
+                            Log.e("HomeImgID", temp);
                             int k = getResources().getIdentifier(temp,"id","com.example.test1");
                             ImageView img = (ImageView) findViewById(k);
                             img.setImageResource(R.drawable.black);
