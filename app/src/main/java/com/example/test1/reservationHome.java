@@ -55,10 +55,16 @@ public class reservationHome extends AppCompatActivity implements SwipeRefreshLa
         super.onCreate(savedInstanceState);
         setContentView(R.layout.reservation_home);
 
+        startLoading();
         HomeContext = this;
         initView();
         initializeListener();
         InitializeOther();
+    }
+
+    public void startLoading(){
+        Intent intent = new Intent(getApplicationContext(),Loading.class);
+        startActivity(intent);
     }
 
     public void onClickHandlerReservationHome1(View view){

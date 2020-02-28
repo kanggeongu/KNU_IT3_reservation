@@ -11,9 +11,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".reservationHome"></activity>
-        <activity android:name=".myReservation" />
-        <activity android:name=".reservationPage" />
+        <activity android:name=".Loading"></activity>
+        <activity
+            android:name=".reservationHome"
+            android:launchMode="singleTask"></activity>
+        <activity
+            android:name=".myReservation"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".reservationPage"
+            android:launchMode="singleTask" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -45,9 +45,15 @@ public class myReservation extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.my_reservation);
 
+        startLoading();
         mContext = this;
         init();
         func();
+    }
+
+    public void startLoading(){
+        Intent intent = new Intent(getApplicationContext(),Loading.class);
+        startActivity(intent);
     }
 
     public void init(){

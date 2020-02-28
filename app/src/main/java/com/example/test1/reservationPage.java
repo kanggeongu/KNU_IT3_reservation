@@ -7,6 +7,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
@@ -71,10 +72,16 @@ public class reservationPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.reservation_page);
 
+        startLoading();
         initView();
         setLayout();
         initializeListener();
         InitializeOther();
+    }
+
+    public void startLoading(){
+        Intent intent = new Intent(getApplicationContext(),Loading.class);
+        startActivity(intent);
     }
 
     public void setLayout(){
