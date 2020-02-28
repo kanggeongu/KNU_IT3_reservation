@@ -99,8 +99,7 @@ public class reservationPage extends AppCompatActivity {
             tv.setText(String.format("%02d", i));
             tv.setLayoutParams(layoutParams);
             tv.setGravity(Gravity.CENTER);
-            Drawable drawble = getResources().getDrawable(R.drawable.border);
-            tv.setBackground(drawble);
+            tv.setBackgroundResource(R.drawable.border);
             linearLayoutTextRPage.addView(tv);
         }
 
@@ -112,9 +111,8 @@ public class reservationPage extends AppCompatActivity {
                 String temp = "img"+Integer.toString(k);
                 int a = getResources().getIdentifier(temp,"id","com.example.test1");
                 iv.setId(a);
-                iv.setImageDrawable(getResources().getDrawable(R.drawable.white));
-                Drawable drawble = getResources().getDrawable(R.drawable.border);
-                iv.setBackground(drawble);
+                iv.setImageResource(R.drawable.blank);
+                iv.setBackgroundResource(R.drawable.border_white);
                 linearLayoutImageRPage.addView(iv);
             }
         }
@@ -318,7 +316,7 @@ public class reservationPage extends AppCompatActivity {
             String temp = "img"+Long.toString(i);
             int k = getResources().getIdentifier(temp,"id","com.example.test1");
             ImageView img = (ImageView) findViewById(k);
-            img.setImageResource(R.drawable.white);
+            img.setBackgroundResource(R.drawable.border_white);
             if(i%100==0) i+=30;
             else i+=70;
         }
@@ -340,7 +338,7 @@ public class reservationPage extends AppCompatActivity {
                             String temp = "img"+Long.toString(i);
                             int k = getResources().getIdentifier(temp,"id","com.example.test1");
                             ImageView img = (ImageView) findViewById(k);
-                            img.setImageResource(R.drawable.black);
+                            img.setBackgroundResource(R.drawable.border_black);
                             if(i%100==0) i+=30;
                             else i+=70;
                         }
