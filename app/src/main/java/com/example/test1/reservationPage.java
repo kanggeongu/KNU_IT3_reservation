@@ -124,6 +124,9 @@ public class reservationPage extends AppCompatActivity {
         startTimepicker = (TimePicker)findViewById(R.id.startTimepicker);
         endTimepicker = (TimePicker)findViewById(R.id.endTimepicker);
         txvDate = (TextView)findViewById(R.id.txvDate);
+
+        TextView toolbarTitle = (TextView) findViewById(R.id.toolbarTitle);
+        toolbarTitle.setText(room.roomID);
     }
 
     public void initializeListener(){

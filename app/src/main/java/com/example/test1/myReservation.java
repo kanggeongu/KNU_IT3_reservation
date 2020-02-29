@@ -2,16 +2,21 @@ package com.example.test1;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.viewpager2.widget.ViewPager2;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ExpandableListView;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -114,7 +119,8 @@ public class myReservation extends AppCompatActivity {
         TextView textViewEmpty = new TextView(myReservation.this);
         textViewEmpty.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT));
-        textViewEmpty.setTextSize(30);
+        textViewEmpty.setTextSize(20);
+        textViewEmpty.setGravity(Gravity.CENTER);
         textViewEmpty.setText("예약 정보가 없습니다.");
         topLayout.addView(textViewEmpty);
     }
@@ -131,8 +137,17 @@ public class myReservation extends AppCompatActivity {
         TextView textViewRoom = new TextView(myReservation.this);
         textViewRoom.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT));
-        textViewRoom.setText("방 : " + roomID);
-        topLayout.addView(textViewRoom);
+        textViewRoom.setTextSize(20);
+        textViewRoom.setGravity(Gravity.CENTER);
+        textViewRoom.setText(roomID);
+        textViewRoom.setTextColor(Color.BLACK);
+        textViewRoom.setPadding(10,20,10,20);
+
+        LinearLayout ll = new LinearLayout(myReservation.this);
+        ll.setGravity(Gravity.CENTER);
+        ll.addView(textViewRoom);
+        ll.setBackgroundResource(R.drawable.border_tv);
+        topLayout.addView(ll);
     }
 
     public void attachTimeTable(){
@@ -142,17 +157,52 @@ public class myReservation extends AppCompatActivity {
     public void attachUser(String userName, String userID){
         TextView textViewUser = new TextView(myReservation.this);
         textViewUser.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT));
-        textViewUser.setText("이름 : " + userName + " / 아이디 : " + userID);
-        topLayout.addView(textViewUser);
+                LinearLayout.LayoutParams.WRAP_CONTENT, 1f));
+        textViewUser.setText("이름 : " + userName);
+        textViewUser.setTextSize(12);
+        textViewUser.setGravity(Gravity.CENTER);
+        textViewUser.setPadding(10,20,10,20);
+
+        TextView tv = new TextView(myReservation.this);
+        tv.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT, 1f));
+        tv.setText("아이디 : " + userID);
+        tv.setTextSize(12);
+        tv.setGravity(Gravity.CENTER);
+        tv.setPadding(10,20,10,20);
+
+        LinearLayout ll = new LinearLayout(myReservation.this);
+        ll.setOrientation(LinearLayout.HORIZONTAL);
+        ll.setGravity(Gravity.CENTER);
+        ll.addView(textViewUser);
+        ll.addView(tv);
+        ll.setBackgroundResource(R.drawable.border_tv);
+        topLayout.addView(ll);
     }
 
     public void attachTime(String startTime, String endTime){
         TextView textViewTime = new TextView(myReservation.this);
         textViewTime.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT));
-        textViewTime.setText("예약시간 : " + startTime + " ~ " + endTime);
-        topLayout.addView(textViewTime);
+        String y = startTime.substring(0,4);
+        String m = startTime.substring(4,6);
+        String d = startTime.substring(6,8);
+        String sh = startTime.substring(8,10);
+        String sm = startTime.substring(10,12);
+        String eh = endTime.substring(8,10);
+        String em = endTime.substring(10,12);
+
+        textViewTime.setText(y+"."+m+"."+d+"\n"+sh+":"+sm+"~"+eh+":"+em);
+        textViewTime.setTextSize(15);
+        textViewTime.setGravity(Gravity.CENTER);
+        textViewTime.setPadding(10,20,10,20);
+
+        LinearLayout ll = new LinearLayout(this);
+        ll.setGravity(Gravity.CENTER);
+        ll.addView(textViewTime);
+        ll.setBackgroundResource(R.drawable.border_tv);
+
+        topLayout.addView(ll);
     }
 
     public void attachDeleteButton(final String key, final RData rData){
