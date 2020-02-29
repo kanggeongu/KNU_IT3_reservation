@@ -46,6 +46,7 @@ public class myReservation extends AppCompatActivity {
     String stringNow = sdfNow.format(date);
 
     LinearLayout topLayout;
+    LinearLayout childLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -128,11 +129,15 @@ public class myReservation extends AppCompatActivity {
     }
 
     public void ListView(String key, RData rData){
+        childLayout = new LinearLayout(myReservation.this);
+        childLayout.setOrientation(LinearLayout.VERTICAL);
         attachRoom(key.substring(12));
         attachTimeTable(rData);
         attachUser(rData.userName, rData.userID);
         attachTime(rData.startTime, rData.endTime);
         attachDeleteButton(key, rData);
+        childLayout.setPadding(10,20,10,20);
+        topLayout.addView(childLayout);
     }
 
     public void attachRoom(String roomID){
@@ -143,13 +148,13 @@ public class myReservation extends AppCompatActivity {
         textViewRoom.setGravity(Gravity.CENTER);
         textViewRoom.setText(roomID);
         textViewRoom.setTextColor(Color.BLACK);
-        textViewRoom.setPadding(10,20,10,20);
+        textViewRoom.setPadding(20,30,20,30);
 
         LinearLayout ll = new LinearLayout(myReservation.this);
         ll.setGravity(Gravity.CENTER);
         ll.addView(textViewRoom);
         ll.setBackgroundResource(R.drawable.border_tv);
-        topLayout.addView(ll);
+        childLayout.addView(ll);
     }
 
     public void attachTimeTable(RData rData){
@@ -192,8 +197,8 @@ public class myReservation extends AppCompatActivity {
             }
         }
 
-        topLayout.addView(linearLayoutTextRPage);
-        topLayout.addView(linearLayoutImageRPage);
+        childLayout.addView(linearLayoutTextRPage);
+        childLayout.addView(linearLayoutImageRPage);
     }
 
     public void attachUser(String userName, String userID){
@@ -219,7 +224,7 @@ public class myReservation extends AppCompatActivity {
         ll.addView(textViewUser);
         ll.addView(tv);
         ll.setBackgroundResource(R.drawable.border_tv);
-        topLayout.addView(ll);
+        childLayout.addView(ll);
     }
 
     public void attachTime(String startTime, String endTime){
@@ -244,7 +249,7 @@ public class myReservation extends AppCompatActivity {
         ll.addView(textViewTime);
         ll.setBackgroundResource(R.drawable.border_tv);
 
-        topLayout.addView(ll);
+        childLayout.addView(ll);
     }
 
     public void attachDeleteButton(final String key, final RData rData){
@@ -252,14 +257,17 @@ public class myReservation extends AppCompatActivity {
         buttonDel.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT));
         buttonDel.setText("삭제");
-        buttonDel.setBackgroundResource(R.drawable.blank);
         buttonDel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 reservationDelete(key, rData);
             }
         });
-        topLayout.addView(buttonDel);
+        LinearLayout ll = new LinearLayout(this);
+        ll.setGravity(Gravity.CENTER);
+        ll.addView(buttonDel);
+        ll.setBackgroundResource(R.drawable.border_tv);
+        childLayout.addView(ll);
     }
 
     public void reservationDelete(final String roomID, RData rData){
