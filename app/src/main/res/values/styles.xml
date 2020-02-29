@@ -4,14 +4,14 @@
         <!-- Customize your theme here. -->
         <item name="colorPrimary">#FF0000</item>
         <item name="colorPrimaryDark">#bb0000</item>
-        <item name="colorAccent">#770000</item>
+        <item name="colorAccent">#aa0000</item>
         <item name="windowNoTitle">true</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
         <item name="colorPrimary">#FF0000</item>
         <item name="colorPrimaryDark">#bb0000</item>
-        <item name="colorAccent">#770000</item>
+        <item name="colorAccent">#aa0000</item>
         <item name="windowNoTitle">true</item>
     </style>
 
