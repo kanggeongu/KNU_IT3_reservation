@@ -11,10 +11,12 @@ import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ExpandableListView;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -125,12 +127,12 @@ public class myReservation extends AppCompatActivity {
         topLayout.addView(textViewEmpty);
     }
 
-    public void ListView(String roomID, RData rData){
-        attachRoom(roomID.substring(12));
-        attachTimeTable();
+    public void ListView(String key, RData rData){
+        attachRoom(key.substring(12));
+        attachTimeTable(rData);
         attachUser(rData.userName, rData.userID);
         attachTime(rData.startTime, rData.endTime);
-        attachDeleteButton(roomID, rData);
+        attachDeleteButton(key, rData);
     }
 
     public void attachRoom(String roomID){
@@ -150,8 +152,48 @@ public class myReservation extends AppCompatActivity {
         topLayout.addView(ll);
     }
 
-    public void attachTimeTable(){
+    public void attachTimeTable(RData rData){
 
+        LinearLayout linearLayoutTextRPage = new LinearLayout(myReservation.this);
+        linearLayoutTextRPage.setOrientation(LinearLayout.HORIZONTAL);
+
+        LinearLayout linearLayoutImageRPage = new LinearLayout(myReservation.this);
+        linearLayoutImageRPage.setOrientation(LinearLayout.HORIZONTAL);
+
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT
+                ,1f);
+
+        for(int i=9;i<=23;i++){
+            TextView tv = new TextView(this);
+            tv.setText(String.format("%02d", i));
+            tv.setLayoutParams(layoutParams);
+            tv.setGravity(Gravity.CENTER);
+            tv.setBackgroundResource(R.drawable.border);
+            linearLayoutTextRPage.addView(tv);
+        }
+
+        long sTime = Long.parseLong(rData.startTime);
+        long eTime = Long.parseLong(rData.endTime);
+        long Date = sTime / 10000 * 10000;
+
+        for(int i=9;i<=23;i++){
+            for(int j=0;j<=30;j+=30){
+                ImageView iv = new ImageView(this);
+                iv.setLayoutParams(layoutParams);
+                int k = i*100+j;
+                iv.setImageResource(R.drawable.blank);
+
+                if(sTime <= Date + k && Date + k < eTime)
+                    iv.setBackgroundResource(R.drawable.border_black);
+                else
+                    iv.setBackgroundResource(R.drawable.border_white);
+                linearLayoutImageRPage.addView(iv);
+            }
+        }
+
+        topLayout.addView(linearLayoutTextRPage);
+        topLayout.addView(linearLayoutImageRPage);
     }
 
     public void attachUser(String userName, String userID){
@@ -219,7 +261,6 @@ public class myReservation extends AppCompatActivity {
         });
         topLayout.addView(buttonDel);
     }
-
 
     public void reservationDelete(final String roomID, RData rData){
         databaseReference.child("Rooms").child(roomID.substring(12)).addListenerForSingleValueEvent(new ValueEventListener() {

@@ -213,12 +213,12 @@ public class reservationPage extends AppCompatActivity {
         etime = selectedDate+ehour*100+(emin % 2==0?0:30);
         if(etime % 10000 == 0) etime += 2400;
 
-        if(stime + Long.parseLong(stringNow)<-30){
-            Toast.makeText(this.getApplicationContext(),"start time should be faster than now",Toast.LENGTH_LONG).show();
+        if(stime + 30 <= Long.parseLong(stringNow)){
+            Toast.makeText(this.getApplicationContext(),"현재 시간보다 이후로 예약을 해주십시오.",Toast.LENGTH_LONG).show();
             return;
         }
         if(stime>=etime){
-            Toast.makeText(this.getApplicationContext(),"start time should be faster than end time",Toast.LENGTH_LONG).show();
+            Toast.makeText(this.getApplicationContext(),"시작시간이 더 일찍 와야합니다.",Toast.LENGTH_LONG).show();
             return;
         }
         if(stime % 10000 < 900){
