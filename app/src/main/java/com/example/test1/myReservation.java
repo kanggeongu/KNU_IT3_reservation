@@ -4,7 +4,9 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager2.widget.ViewPager2;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
@@ -260,7 +262,19 @@ public class myReservation extends AppCompatActivity {
         buttonDel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                reservationDelete(key, rData);
+
+                new AlertDialog.Builder(myReservation.this)
+                        .setTitle("")
+                        .setMessage("정말 삭제하시겠습니까?")
+                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int whichButton) {
+                                reservationDelete(key, rData);
+                            }})
+                        .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int whichButton) {
+                                Toast.makeText(myReservation.this, "취소하였습니다.", Toast.LENGTH_SHORT).show();
+                            }})
+                        .show();
             }
         });
         LinearLayout ll = new LinearLayout(this);
@@ -271,6 +285,7 @@ public class myReservation extends AppCompatActivity {
     }
 
     public void reservationDelete(final String roomID, RData rData){
+
         databaseReference.child("Rooms").child(roomID.substring(12)).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -305,6 +320,6 @@ public class myReservation extends AppCompatActivity {
             }
         });
 
-        Toast.makeText(getApplicationContext(),"Delete Complete",Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(),"삭제 완료하였습니다.",Toast.LENGTH_LONG).show();
     }
 }

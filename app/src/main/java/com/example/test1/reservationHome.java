@@ -5,8 +5,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.app.ActionBar;
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -22,6 +24,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.Toolbar;
 
 import com.google.firebase.database.DataSnapshot;
@@ -307,5 +310,21 @@ public class reservationHome extends AppCompatActivity implements SwipeRefreshLa
 
             }
         });
+    }
+
+    @Override
+    public void onBackPressed(){
+        new AlertDialog.Builder(reservationHome.this)
+                .setTitle("")
+                .setMessage("정말 종료하시겠습니까?")
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        finish();
+                    }})
+                .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        Toast.makeText(reservationHome.this, "취소하였습니다.", Toast.LENGTH_SHORT).show();
+                    }})
+                .show();
     }
 }

@@ -256,8 +256,20 @@ public class reservationPage extends AppCompatActivity {
                         }
                     }
                 }
-                if(flag)
-                    submit2();
+                if(flag){
+                    new android.app.AlertDialog.Builder(reservationPage.this)
+                            .setTitle("")
+                            .setMessage("정말 예약하시겠습니까?")
+                            .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int whichButton) {
+                                    submit2();
+                                }})
+                            .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int whichButton) {
+                                    Toast.makeText(reservationPage.this, "취소하였습니다.", Toast.LENGTH_SHORT).show();
+                                }})
+                            .show();
+                }
                 else
                     Toast.makeText(getApplicationContext(),"예약시간이 겹칩니다.",Toast.LENGTH_LONG).show();
             }
