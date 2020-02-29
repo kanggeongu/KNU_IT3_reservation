@@ -136,7 +136,7 @@ public class reservationPage extends AppCompatActivity {
                 ny = year; nm = month+1; nd = dayOfMonth;
                 long y = year, m=month+1, d=dayOfMonth;
                 txvDate.setText(y+"년 " + m + "월 " + d + "일");
-                selectedDate = y % 100 * 100000000+m*1000000+d*10000;
+                selectedDate = y * 100000000+m*1000000+d*10000;
                 Log.e("Dateselected Page 94",selectedDate + "");
                 changeImageView();
             }
@@ -146,7 +146,7 @@ public class reservationPage extends AppCompatActivity {
     public void InitializeOther(){
         setinterval();
 
-        long longNow = Long.parseLong(stringNow);
+        long longNow = getIntent().getExtras().getLong("selectedDate");
         long y = longNow/100000000;
         long m = (longNow%100000000)/1000000;
         long d = (longNow%1000000)/10000;

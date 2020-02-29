@@ -129,6 +129,7 @@ public class reservationHome extends AppCompatActivity implements SwipeRefreshLa
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         User realUser = dataSnapshot.getValue(User.class);
                         intent.putExtra("user",realUser);
+                        intent.putExtra("selectedDate", selectedDate);
                         startActivity(intent);
                     }
 
