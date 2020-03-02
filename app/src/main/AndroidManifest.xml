@@ -7,14 +7,15 @@
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher_round"
-        android:label="IT-3 예약"
+        android:label="IT-3 예약어플"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Loading"></activity>
+        <activity android:name=".reservaionRoomList"></activity>
+        <activity android:name=".Loading" />
         <activity
             android:name=".reservationHome"
-            android:launchMode="singleTask"></activity>
+            android:launchMode="singleTask" />
         <activity
             android:name=".myReservation"
             android:launchMode="singleTask" />

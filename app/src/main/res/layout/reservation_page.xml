@@ -129,7 +129,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="Name"
+                android:hint="이름"
                 android:inputType="textPersonName"
                 android:textAlignment="center" />
 

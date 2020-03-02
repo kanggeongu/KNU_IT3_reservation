@@ -147,6 +147,44 @@ public class reservationHome extends AppCompatActivity implements SwipeRefreshLa
         });
     }
 
+    public void onClickHandlerReservationHome3(View view){
+        String roomId = null;
+
+        switch (view.getId()){
+            case R.id.buttonRoom103:
+                roomId = "103";
+                break;
+            case R.id.buttonRoom104:
+                roomId = "104";
+                break;
+            case R.id.buttonRoom106:
+                roomId = "106";
+                break;
+            case R.id.buttonRoom111:
+                roomId = "111";
+                break;
+            case R.id.buttonRoom413:
+                roomId = "413";
+                break;
+        }
+
+        databaseReference.child("Rooms").child(roomId).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Room room = dataSnapshot.getValue(Room.class);
+                intent = new Intent(getApplicationContext(),reservaionRoomList.class);
+                intent.putExtra("room",room);
+                intent.putExtra("selectedDate", selectedDate);
+                startActivity(intent);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
     @Override
     public void onRefresh() {
         changeImageView("room1");
@@ -276,7 +314,6 @@ public class reservationHome extends AppCompatActivity implements SwipeRefreshLa
                 break;
         }
 
-        Log.e("HometempString : ", tempString);
         databaseReference.child("Rooms").child(tempString).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

@@ -137,7 +137,6 @@ public class reservationPage extends AppCompatActivity {
                 long y = year, m=month+1, d=dayOfMonth;
                 txvDate.setText(y+"년 " + m + "월 " + d + "일");
                 selectedDate = y * 100000000+m*1000000+d*10000;
-                Log.e("Dateselected Page 94",selectedDate + "");
                 changeImageView();
             }
         };
@@ -153,7 +152,6 @@ public class reservationPage extends AppCompatActivity {
         ny=(int)y; nm=(int)m; nd=(int)d;
         txvDate.setText(y+"년 "+m+"월 "+d+"일");
         selectedDate = (longNow/10000)*10000;
-        Log.e("Dateselected Home 110",selectedDate + "");
 
         changeImageView();
     }
