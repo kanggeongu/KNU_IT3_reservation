@@ -8,9 +8,6 @@
     tools:context=".reservationHome">
 
     <androidx.appcompat.widget.Toolbar
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -21,14 +18,14 @@
         app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
         <TextView
+            android:id="@+id/toolbarTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="IT-3 방 예약"
             android:layout_gravity="center"
-            android:id="@+id/toolbarTitle"
-            android:textSize="20sp"
+            android:fontFamily="@font/lottemart"
+            android:text="IT-3 강의실 예약"
             android:textColor="#ffffff"
-            />
+            android:textSize="24dp" />
 
     </androidx.appcompat.widget.Toolbar>
 
@@ -54,15 +51,23 @@
 
                     <Button
                         android:id="@+id/buttonMy"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_width="120dp"
+                        android:layout_height="45dp"
+                        android:layout_marginLeft="3dp"
+                        android:layout_marginTop="7dp"
                         android:layout_weight="2"
+                        android:background="@drawable/button_main"
+                        android:fontFamily="@font/andika"
                         android:onClick="onClickHandlerReservationHome1"
-                        android:text="내 예약" />
+                        android:text="My"
+                        android:textAllCaps="false"
+                        android:textColor="#000000"
+                        android:textSize="18dp"
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/txvDate2"
-                        android:layout_width="match_parent"
+                        android:layout_width="300dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
@@ -70,17 +75,22 @@
 
                     <Button
                         android:id="@+id/btnDatepicker2"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_width="100dp"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginRight="8dp"
+                        android:layout_marginBottom="5dp"
                         android:layout_weight="2"
-                        android:onClick="onClickHandlerReservationHome1"
-                        android:text="날짜 선택" />
+                        android:background="@drawable/calendar_4"
+                        android:onClick="onClickHandlerReservationHome1" />
 
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
                     android:background="@drawable/layoutborder"
                     android:orientation="vertical">
 
@@ -101,9 +111,11 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
+                            android:fontFamily="@font/andika"
                             android:gravity="center_horizontal"
                             android:text="103"
                             android:textAlignment="center"
+                            android:textColor="#000000"
                             android:textSize="30dp" />
 
                         <LinearLayout
@@ -134,40 +146,59 @@
                         android:orientation="horizontal">
 
                         <LinearLayout
-                            android:layout_width="match_parent"
+                            android:layout_width="20dp"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
                             android:orientation="horizontal" />
 
                         <Button
                             android:id="@+id/buttonRoom1"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_width="40dp"
+                            android:layout_height="45dp"
+                            android:layout_marginRight="40dp"
                             android:layout_weight="1"
+                            android:background="@drawable/button_home"
+                            android:fontFamily="@font/lottemart"
                             android:onClick="onClickHandlerReservationHome2"
-                            android:text="예약하기" />
+                            android:text="예약하기"
+                            android:textColor="#FFFFFF"
+                            android:textSize="17dp" />
 
                         <Button
                             android:id="@+id/buttonRoom103"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_width="40dp"
+                            android:layout_height="45dp"
                             android:layout_weight="1"
+                            android:background="@drawable/button_home"
+                            android:fontFamily="@font/lottemart"
                             android:onClick="onClickHandlerReservationHome3"
-                            android:text="예약현황" />
+                            android:text="예약현황"
+                            android:textColor="#FFFFFF"
+                            android:textSize="17dp" />
 
                         <LinearLayout
-                            android:layout_width="match_parent"
+                            android:layout_width="20dp"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
                             android:orientation="horizontal" />
                     </LinearLayout>
+
+                    <ImageView
+                        android:id="@+id/imageView2"
+                        android:layout_width="match_parent"
+                        android:layout_height="10dp"
+                        android:layerType="software"
+                        android:src="@drawable/dot" />
+
 
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/layoutborder"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:background="@drawable/layoutborder_middle"
                     android:orientation="vertical">
 
                     <LinearLayout
@@ -187,9 +218,11 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
+                            android:fontFamily="@font/andika"
                             android:gravity="center_horizontal"
                             android:text="104"
                             android:textAlignment="center"
+                            android:textColor="#000000"
                             android:textSize="30dp" />
 
                         <LinearLayout
@@ -218,39 +251,57 @@
                         android:orientation="horizontal">
 
                         <LinearLayout
-                            android:layout_width="match_parent"
+                            android:layout_width="20dp"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
                             android:orientation="horizontal" />
 
                         <Button
                             android:id="@+id/buttonRoom2"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_width="40dp"
+                            android:layout_height="45dp"
+                            android:layout_marginRight="40dp"
                             android:layout_weight="1"
+                            android:background="@drawable/button_home"
+                            android:fontFamily="@font/lottemart"
                             android:onClick="onClickHandlerReservationHome2"
-                            android:text="예약하기" />
+                            android:text="예약하기"
+                            android:textColor="#FFFFFF"
+                            android:textSize="17dp" />
 
                         <Button
                             android:id="@+id/buttonRoom104"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_width="40dp"
+                            android:layout_height="45dp"
                             android:layout_weight="1"
+                            android:background="@drawable/button_home"
+                            android:fontFamily="@font/lottemart"
                             android:onClick="onClickHandlerReservationHome3"
-                            android:text="예약현황" />
+                            android:text="예약현황"
+                            android:textColor="#FFFFFF"
+                            android:textSize="17dp" />
 
                         <LinearLayout
-                            android:layout_width="match_parent"
+                            android:layout_width="20dp"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
                             android:orientation="horizontal" />
                     </LinearLayout>
+
+                    <ImageView
+                        android:id="@+id/imageView3"
+                        android:layout_width="match_parent"
+                        android:layout_height="10dp"
+                        android:layerType="software"
+                        android:src="@drawable/dot" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/layoutborder"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:background="@drawable/layoutborder_middle"
                     android:orientation="vertical">
 
                     <LinearLayout
@@ -270,9 +321,11 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
+                            android:fontFamily="@font/andika"
                             android:gravity="center_horizontal"
                             android:text="106"
                             android:textAlignment="center"
+                            android:textColor="#000000"
                             android:textSize="30dp" />
 
                         <LinearLayout
@@ -301,39 +354,58 @@
                         android:orientation="horizontal">
 
                         <LinearLayout
-                            android:layout_width="match_parent"
+                            android:layout_width="20dp"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
                             android:orientation="horizontal" />
 
                         <Button
                             android:id="@+id/buttonRoom3"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_width="40dp"
+                            android:layout_height="45dp"
+                            android:layout_marginRight="40dp"
                             android:layout_weight="1"
+                            android:background="@drawable/button_home"
+                            android:fontFamily="@font/lottemart"
                             android:onClick="onClickHandlerReservationHome2"
-                            android:text="예약하기" />
+                            android:text="예약하기"
+                            android:textColor="#FFFFFF"
+                            android:textSize="17dp" />
 
                         <Button
                             android:id="@+id/buttonRoom106"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_width="40dp"
+                            android:layout_height="45dp"
                             android:layout_weight="1"
+                            android:background="@drawable/button_home"
+                            android:fontFamily="@font/lottemart"
                             android:onClick="onClickHandlerReservationHome3"
-                            android:text="예약현황" />
+                            android:text="예약현황"
+                            android:textColor="#FFFFFF"
+                            android:textSize="17dp" />
 
                         <LinearLayout
-                            android:layout_width="match_parent"
+                            android:layout_width="20dp"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
                             android:orientation="horizontal" />
                     </LinearLayout>
+
+                    <ImageView
+                        android:id="@+id/imageView4"
+                        android:layout_width="match_parent"
+                        android:layout_height="10dp"
+                        android:layerType="software"
+                        android:src="@drawable/dot" />
+
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/layoutborder"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:background="@drawable/layoutborder_middle"
                     android:orientation="vertical">
 
                     <LinearLayout
@@ -353,9 +425,11 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
+                            android:fontFamily="@font/andika"
                             android:gravity="center_horizontal"
                             android:text="111"
                             android:textAlignment="center"
+                            android:textColor="#000000"
                             android:textSize="30dp" />
 
                         <LinearLayout
@@ -384,40 +458,58 @@
                         android:orientation="horizontal">
 
                         <LinearLayout
-                            android:layout_width="match_parent"
+                            android:layout_width="20dp"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
                             android:orientation="horizontal" />
 
                         <Button
                             android:id="@+id/buttonRoom4"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_width="40dp"
+                            android:layout_height="45dp"
+                            android:layout_marginRight="40dp"
                             android:layout_weight="1"
+                            android:background="@drawable/button_home"
+                            android:fontFamily="@font/lottemart"
                             android:onClick="onClickHandlerReservationHome2"
-                            android:text="예약하기" />
+                            android:text="예약하기"
+                            android:textColor="#FFFFFF"
+                            android:textSize="17dp" />
 
                         <Button
                             android:id="@+id/buttonRoom111"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_width="40dp"
+                            android:layout_height="45dp"
                             android:layout_weight="1"
+                            android:background="@drawable/button_home"
+                            android:fontFamily="@font/lottemart"
                             android:onClick="onClickHandlerReservationHome3"
-                            android:text="예약현황" />
+                            android:text="예약현황"
+                            android:textColor="#FFFFFF"
+                            android:textSize="17dp" />
 
                         <LinearLayout
-                            android:layout_width="match_parent"
+                            android:layout_width="20dp"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
                             android:orientation="horizontal" />
                     </LinearLayout>
+
+                    <ImageView
+                        android:id="@+id/imageView5"
+                        android:layout_width="match_parent"
+                        android:layout_height="10dp"
+                        android:layerType="software"
+                        android:src="@drawable/dot" />
 
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/layoutborder"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:background="@drawable/layoutborder_end"
                     android:orientation="vertical">
 
                     <LinearLayout
@@ -437,9 +529,11 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
+                            android:fontFamily="@font/andika"
                             android:gravity="center_horizontal"
                             android:text="413"
                             android:textAlignment="center"
+                            android:textColor="#000000"
                             android:textSize="30dp" />
 
                         <LinearLayout
@@ -465,32 +559,42 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:layout_marginBottom="7dp"
                         android:orientation="horizontal">
 
                         <LinearLayout
-                            android:layout_width="match_parent"
+                            android:layout_width="20dp"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
                             android:orientation="horizontal" />
 
                         <Button
                             android:id="@+id/buttonRoom5"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_width="40dp"
+                            android:layout_height="45dp"
+                            android:layout_marginRight="40dp"
                             android:layout_weight="1"
+                            android:background="@drawable/button_home"
+                            android:fontFamily="@font/lottemart"
                             android:onClick="onClickHandlerReservationHome2"
-                            android:text="예약하기" />
+                            android:text="예약하기"
+                            android:textColor="#FFFFFF"
+                            android:textSize="17dp" />
 
                         <Button
                             android:id="@+id/buttonRoom413"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_width="40dp"
+                            android:layout_height="45dp"
                             android:layout_weight="1"
+                            android:background="@drawable/button_home"
+                            android:fontFamily="@font/lottemart"
                             android:onClick="onClickHandlerReservationHome3"
-                            android:text="예약현황" />
+                            android:text="예약현황"
+                            android:textColor="#FFFFFF"
+                            android:textSize="17dp" />
 
                         <LinearLayout
-                            android:layout_width="match_parent"
+                            android:layout_width="20dp"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
                             android:orientation="horizontal" />

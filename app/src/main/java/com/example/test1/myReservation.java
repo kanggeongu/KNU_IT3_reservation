@@ -2,6 +2,7 @@ package com.example.test1;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.app.AlertDialog;
@@ -9,6 +10,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.util.Log;
@@ -127,6 +129,10 @@ public class myReservation extends AppCompatActivity {
         textViewEmpty.setTextSize(20);
         textViewEmpty.setGravity(Gravity.CENTER);
         textViewEmpty.setText("예약 정보가 없습니다.");
+
+        Typeface typeface = ResourcesCompat.getFont(this, R.font.lottemart);
+        textViewEmpty.setTypeface(typeface);
+
         topLayout.addView(textViewEmpty);
     }
 

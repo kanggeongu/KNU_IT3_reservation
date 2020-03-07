@@ -52,11 +52,19 @@
 
                 <Button
                     android:id="@+id/btnDatepicker"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="55dp"
+                    android:layout_height="45dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginBottom="5dp"
                     android:layout_weight="1"
+                    android:background="@drawable/button_main"
+                    android:fontFamily="@font/andika"
                     android:onClick="OnClickHandler"
-                    android:text="Date" />
+                    android:text="Date"
+                    android:textColor="#000000"
+                    android:textSize="18dp"
+                    android:textStyle="bold" />
             </LinearLayout>
 
 
@@ -85,21 +93,23 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:fontFamily="@font/andika"
                     android:gravity="center"
-                    android:text="Start Time"
                     android:paddingTop="20sp"
-                    android:textSize="20sp"
-                    android:textColor="#000000"/>
+                    android:text="Start Time"
+                    android:textColor="#000000"
+                    android:textSize="20sp" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:fontFamily="@font/andika"
                     android:gravity="center"
-                    android:text="End Time"
                     android:paddingTop="20sp"
-                    android:textSize="20sp"
-                    android:textColor="#000000" />
+                    android:text="End Time"
+                    android:textColor="#000000"
+                    android:textSize="20sp" />
 
             </LinearLayout>
 
@@ -126,19 +136,29 @@
 
             <EditText
                 android:id="@+id/editTextUserName"
-                android:layout_width="match_parent"
+                android:layout_width="300dp"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="55dp"
+                android:layout_marginTop="10dp"
                 android:ems="10"
-                android:hint="이름"
+                android:fontFamily="@font/lottemart"
+                android:hint="예약자 성명"
                 android:inputType="textPersonName"
                 android:textAlignment="center" />
 
             <Button
                 android:id="@+id/buttonReservation"
-                android:layout_width="match_parent"
+                android:layout_width="300dp"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="55dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/button_home"
+                android:fontFamily="@font/andika"
                 android:onClick="OnClickHandler"
-                android:text="Reservation" />
+                android:text="Reservation"
+                android:textColor="#FFFFFF"
+                android:textSize="17dp"
+                android:textStyle="bold" />
 
         </LinearLayout>
     </ScrollView>

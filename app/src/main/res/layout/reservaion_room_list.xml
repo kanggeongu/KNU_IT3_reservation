@@ -54,10 +54,18 @@
 
                 <Button
                     android:id="@+id/btnDatepicker"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="55dp"
+                    android:layout_height="45dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginBottom="5dp"
                     android:layout_weight="1"
-                    android:text="Date" />
+                    android:background="@drawable/button_main"
+                    android:fontFamily="@font/andika"
+                    android:text="Date"
+                    android:textColor="#000000"
+                    android:textSize="18dp"
+                    android:textStyle="bold" />
             </LinearLayout>
 
             <LinearLayout

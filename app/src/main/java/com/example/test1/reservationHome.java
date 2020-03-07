@@ -57,6 +57,9 @@ public class reservationHome extends AppCompatActivity implements SwipeRefreshLa
     String stringNow = sdfNow.format(date);
     TextView txvDate2;
 
+
+
+
     LayoutInflater layoutInflater;
     LinearLayout linearLayoutTextRHome, linearLayoutImageRHome;
 

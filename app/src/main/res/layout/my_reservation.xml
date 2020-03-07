@@ -8,9 +8,6 @@
     tools:context=".myReservation">
 
     <androidx.appcompat.widget.Toolbar
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -21,14 +18,16 @@
         app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
         <TextView
+            android:id="@+id/toolbarTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="내 예약"
             android:layout_gravity="center"
-            android:id="@+id/toolbarTitle"
-            android:textSize="20sp"
+            android:autoText="false"
+            android:fontFamily="@font/lottemart"
+            android:text="나의 예약"
             android:textColor="#ffffff"
-            />
+            android:textSize="25dp"
+            android:textStyle="bold" />
 
     </androidx.appcompat.widget.Toolbar>
 

@@ -9,8 +9,8 @@
 
             <solid android:color="#FFFFFF" />
             <corners
-                android:topLeftRadius="10dp"
-                android:topRightRadius="10dp">
+                android:bottomLeftRadius="10dp"
+                android:bottomRightRadius="10dp">
 
             </corners>
         </shape>
@@ -19,7 +19,7 @@
     <item
         android:left="2dp"
         android:right="2dp"
-        android:top="2dp">
+        android:bottom="2dp">
         <shape android:shape="rectangle" >
             <stroke
                 android:width="2dp"
@@ -27,8 +27,8 @@
 
             <solid android:color="#FFFFFF" />
             <corners
-                android:topLeftRadius="10dp"
-                android:topRightRadius="10dp">
+                android:bottomLeftRadius="10dp"
+                android:bottomRightRadius="10dp">
 
             </corners>
         </shape>
