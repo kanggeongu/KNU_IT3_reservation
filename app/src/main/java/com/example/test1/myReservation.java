@@ -65,6 +65,7 @@ public class myReservation extends AppCompatActivity {
     public void startLoading(){
         Intent intent = new Intent(getApplicationContext(),Loading.class);
         startActivity(intent);
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
     }
 
     public void init(){
