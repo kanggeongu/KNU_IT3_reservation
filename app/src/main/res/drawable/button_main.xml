@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layer-list xmlns:android="http://schemas.android.com/apk/res/android" >
+<selector xmlns:android="http://schemas.android.com/apk/res/android" >
 
     <item
+        android:state_pressed="false"
         android:bottom="2dp"
         android:left="2dp"
         android:right="2dp"
@@ -22,5 +23,27 @@
         </shape>
     </item>
 
-</layer-list>
+    <item
+        android:state_pressed="true"
+        android:bottom="2dp"
+        android:left="2dp"
+        android:right="2dp"
+        android:top="2dp">
+        <shape android:shape="rectangle" >
+            <stroke
+                android:width="2dp"
+                android:color="#e60000" />
+
+            <solid android:color="#dcdcdc" />
+            <corners
+                android:bottomLeftRadius="10dp"
+                android:bottomRightRadius="10dp"
+                android:topLeftRadius="10dp"
+                android:topRightRadius="10dp">
+
+            </corners>
+        </shape>
+    </item>
+
+</selector>
 
