@@ -312,6 +312,7 @@ public class reservationPage extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         ((reservationHome)reservationHome.HomeContext).onRefresh();
+                        startLoading();
                         finish();
                     }
                 })
@@ -359,5 +360,11 @@ public class reservationPage extends AppCompatActivity {
 
             }
         });
+    }
+
+    @Override
+    public void onBackPressed(){
+        startLoading();
+        finish();
     }
 }

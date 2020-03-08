@@ -329,4 +329,10 @@ public class myReservation extends AppCompatActivity {
 
         Toast.makeText(getApplicationContext(),"삭제 완료하였습니다.",Toast.LENGTH_LONG).show();
     }
+
+    @Override
+    public void onBackPressed(){
+        startLoading();
+        finish();
+    }
 }

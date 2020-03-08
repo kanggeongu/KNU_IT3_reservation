@@ -3,7 +3,9 @@ package com.example.test1;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,6 +16,7 @@ import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -33,7 +36,7 @@ public class reservaionRoomList extends AppCompatActivity {
     Button btnDatepicker;
     DatePickerDialog.OnDateSetListener datePickerListener;
 
-    int ny =0, nm=0, nd=0;
+    int ny = 0, nm = 0, nd = 0;
     long selectedDate;
 
     LinearLayout topLayout;
@@ -50,59 +53,63 @@ public class reservaionRoomList extends AppCompatActivity {
         InitializeOther();
     }
 
-    public void init(){
+    public void init() {
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference();
 
-        toolbarTitle1 = (TextView)findViewById(R.id.toolbarTitle1);
-        room = (Room)getIntent().getSerializableExtra("room");
+        toolbarTitle1 = (TextView) findViewById(R.id.toolbarTitle1);
+        room = (Room) getIntent().getSerializableExtra("room");
 
-        toolbarTitle1.setText( room.roomID );
-        txvDate = (TextView)findViewById(R.id.txvDate);
+        toolbarTitle1.setText(room.roomID);
+        txvDate = (TextView) findViewById(R.id.txvDate);
 
-        btnDatepicker = (Button)findViewById(R.id.btnDatepicker);
+        btnDatepicker = (Button) findViewById(R.id.btnDatepicker);
         btnDatepicker.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DatePickerDialog dialog = new DatePickerDialog(reservaionRoomList.this, datePickerListener, ny,nm-1,nd);
+                DatePickerDialog dialog = new DatePickerDialog(reservaionRoomList.this, datePickerListener, ny, nm - 1, nd);
                 dialog.show();
             }
         });
     }
 
-    public void initializeListener(){
+    public void initializeListener() {
         datePickerListener = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                ny = year; nm = month+1; nd = dayOfMonth;
-                long y = year, m=month+1, d=dayOfMonth;
-                txvDate.setText(y+"년 " + m + "월 " + d + "일");
-                selectedDate = y * 100000000+m*1000000+d*10000;
+                ny = year;
+                nm = month + 1;
+                nd = dayOfMonth;
+                long y = year, m = month + 1, d = dayOfMonth;
+                txvDate.setText(y + "년 " + m + "월 " + d + "일");
+                selectedDate = y * 100000000 + m * 1000000 + d * 10000;
                 changeView();
             }
         };
     }
 
-    public void InitializeOther(){
+    public void InitializeOther() {
         long longNow = getIntent().getExtras().getLong("selectedDate");
-        long y = longNow/100000000;
-        long m = (longNow%100000000)/1000000;
-        long d = (longNow%1000000)/10000;
-        ny=(int)y; nm=(int)m; nd=(int)d;
-        txvDate.setText(y+"년 "+m+"월 "+d+"일");
-        selectedDate = (longNow/10000)*10000;
+        long y = longNow / 100000000;
+        long m = (longNow % 100000000) / 1000000;
+        long d = (longNow % 1000000) / 10000;
+        ny = (int) y;
+        nm = (int) m;
+        nd = (int) d;
+        txvDate.setText(y + "년 " + m + "월 " + d + "일");
+        selectedDate = (longNow / 10000) * 10000;
 
         changeView();
     }
 
-    public void startLoading(){
-        Intent intent = new Intent(getApplicationContext(),Loading.class);
+    public void startLoading() {
+        Intent intent = new Intent(getApplicationContext(), Loading.class);
         startActivity(intent);
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
     }
 
-    public void changeView(){
-        topLayout = (LinearLayout)findViewById(R.id.linear1);
+    public void changeView() {
+        topLayout = (LinearLayout) findViewById(R.id.linear1);
         topLayout.removeAllViews();
 
         databaseReference.child("Rooms").child(room.roomID).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -115,17 +122,17 @@ public class reservaionRoomList extends AppCompatActivity {
                 long now = ny * 10000 + nm * 100 + nd;
 
                 boolean flag = false;
-                while(iter.hasNext()){
+                while (iter.hasNext()) {
                     String key = iter.next();
                     RData value = realRoom.roomRMap.get(key);
 
-                    if(now <= Long.valueOf(value.startTime)/10000 && Long.valueOf(value.endTime)/10000 < now + 1) {
+                    if (now <= Long.valueOf(value.startTime) / 10000 && Long.valueOf(value.endTime) / 10000 < now + 1) {
                         flag = true;
                         ListView(key, value);
                     }
                 }
 
-                if(!flag) {
+                if (!flag) {
                     EmptyView();
                 }
             }
@@ -137,7 +144,7 @@ public class reservaionRoomList extends AppCompatActivity {
         });
     }
 
-    public void EmptyView(){
+    public void EmptyView() {
         TextView textViewEmpty = new TextView(reservaionRoomList.this);
         textViewEmpty.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT));
@@ -147,17 +154,17 @@ public class reservaionRoomList extends AppCompatActivity {
         topLayout.addView(textViewEmpty);
     }
 
-    public void ListView(String key, RData rData){
+    public void ListView(String key, RData rData) {
         childLayout = new LinearLayout(reservaionRoomList.this);
         childLayout.setOrientation(LinearLayout.VERTICAL);
         attachTimeTable(rData);
         attachUser(rData.userName, rData.userID);
         attachTime(rData.startTime, rData.endTime);
-        childLayout.setPadding(10,20,10,20);
+        childLayout.setPadding(10, 20, 10, 20);
         topLayout.addView(childLayout);
     }
 
-    public void attachTimeTable(RData rData){
+    public void attachTimeTable(RData rData) {
 
         LinearLayout linearLayoutTextRPage = new LinearLayout(reservaionRoomList.this);
         linearLayoutTextRPage.setOrientation(LinearLayout.HORIZONTAL);
@@ -167,9 +174,9 @@ public class reservaionRoomList extends AppCompatActivity {
 
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT
-                ,1f);
+                , 1f);
 
-        for(int i=9;i<=23;i++){
+        for (int i = 9; i <= 23; i++) {
             TextView tv = new TextView(this);
             tv.setText(String.format("%02d", i));
             tv.setLayoutParams(layoutParams);
@@ -182,14 +189,14 @@ public class reservaionRoomList extends AppCompatActivity {
         long eTime = Long.parseLong(rData.endTime);
         long Date = sTime / 10000 * 10000;
 
-        for(int i=9;i<=23;i++){
-            for(int j=0;j<=30;j+=30){
+        for (int i = 9; i <= 23; i++) {
+            for (int j = 0; j <= 30; j += 30) {
                 ImageView iv = new ImageView(this);
                 iv.setLayoutParams(layoutParams);
-                int k = i*100+j;
+                int k = i * 100 + j;
                 iv.setImageResource(R.drawable.blank);
 
-                if(sTime <= Date + k && Date + k < eTime)
+                if (sTime <= Date + k && Date + k < eTime)
                     iv.setBackgroundResource(R.drawable.border_black);
                 else
                     iv.setBackgroundResource(R.drawable.border_white);
@@ -201,14 +208,14 @@ public class reservaionRoomList extends AppCompatActivity {
         childLayout.addView(linearLayoutImageRPage);
     }
 
-    public void attachUser(String userName, String userID){
+    public void attachUser(String userName, String userID) {
         TextView textViewUser = new TextView(reservaionRoomList.this);
         textViewUser.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT, 1f));
         textViewUser.setText("이름 : " + userName);
         textViewUser.setTextSize(12);
         textViewUser.setGravity(Gravity.CENTER);
-        textViewUser.setPadding(10,20,10,20);
+        textViewUser.setPadding(10, 20, 10, 20);
 
         TextView tv = new TextView(reservaionRoomList.this);
         tv.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
@@ -216,7 +223,7 @@ public class reservaionRoomList extends AppCompatActivity {
         tv.setText("아이디 : " + userID);
         tv.setTextSize(12);
         tv.setGravity(Gravity.CENTER);
-        tv.setPadding(10,20,10,20);
+        tv.setPadding(10, 20, 10, 20);
 
         LinearLayout ll = new LinearLayout(reservaionRoomList.this);
         ll.setOrientation(LinearLayout.HORIZONTAL);
@@ -227,22 +234,22 @@ public class reservaionRoomList extends AppCompatActivity {
         childLayout.addView(ll);
     }
 
-    public void attachTime(String startTime, String endTime){
+    public void attachTime(String startTime, String endTime) {
         TextView textViewTime = new TextView(reservaionRoomList.this);
         textViewTime.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT));
-        String y = startTime.substring(0,4);
-        String m = startTime.substring(4,6);
-        String d = startTime.substring(6,8);
-        String sh = startTime.substring(8,10);
-        String sm = startTime.substring(10,12);
-        String eh = endTime.substring(8,10);
-        String em = endTime.substring(10,12);
+        String y = startTime.substring(0, 4);
+        String m = startTime.substring(4, 6);
+        String d = startTime.substring(6, 8);
+        String sh = startTime.substring(8, 10);
+        String sm = startTime.substring(10, 12);
+        String eh = endTime.substring(8, 10);
+        String em = endTime.substring(10, 12);
 
-        textViewTime.setText(y+"."+m+"."+d+"\n"+sh+":"+sm+"~"+eh+":"+em);
+        textViewTime.setText(y + "." + m + "." + d + "\n" + sh + ":" + sm + "~" + eh + ":" + em);
         textViewTime.setTextSize(15);
         textViewTime.setGravity(Gravity.CENTER);
-        textViewTime.setPadding(10,20,10,20);
+        textViewTime.setPadding(10, 20, 10, 20);
 
         LinearLayout ll = new LinearLayout(this);
         ll.setGravity(Gravity.CENTER);
@@ -250,5 +257,11 @@ public class reservaionRoomList extends AppCompatActivity {
         ll.setBackgroundResource(R.drawable.border_tv);
 
         childLayout.addView(ll);
+    }
+
+    @Override
+    public void onBackPressed(){
+        startLoading();
+        finish();
     }
 }
