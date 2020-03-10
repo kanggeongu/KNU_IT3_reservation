@@ -10,57 +10,68 @@
     tools:context=".MainActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/linearLayout"
+        android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
+        android:layout_height="wrap_content">
 
         <ImageView
             android:id="@+id/imageView"
-            android:layout_width="230sp"
-            android:layout_height="230sp"
-            android:layout_marginTop="50dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="100dp"
+            android:layout_marginBottom="20dp"
             android:scaleType="fitXY"
-            app:layout_constraintBottom_toBottomOf="@id/editTextID"
+            app:layout_constraintBottom_toTopOf="@id/textView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_chainStyle="packed"
-            tools:srcCompat="@drawable/knu_new" />
+            tools:srcCompat="@drawable/knu_200" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/lottemart"
+            android:text="IT-3 강의실 예약"
+            app:layout_constraintBottom_toTopOf="@id/editTextID"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/imageView"
+            android:textColor="#000000"
+            android:textSize="35dp" />
 
         <EditText
             android:id="@+id/editTextID"
-            android:layout_width="230dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
             android:ems="10"
             android:fontFamily="@font/andika"
             android:hint="ID"
             android:inputType="textPersonName"
-            app:layout_constraintBottom_toTopOf="@+id/editTextPW"
+            app:layout_constraintBottom_toTopOf="@id/editTextPW"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView" />
+            app:layout_constraintTop_toBottomOf="@id/textView" />
 
         <EditText
             android:id="@+id/editTextPW"
-            android:layout_width="230dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
             android:ems="10"
             android:fontFamily="@font/andika"
             android:hint="PW"
             android:inputType="textPassword"
-            app:layout_constraintBottom_toTopOf="@+id/LoginButton"
+            app:layout_constraintBottom_toTopOf="@id/LoginButton"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTextID" />
+            app:layout_constraintTop_toBottomOf="@id/editTextID"/>
 
         <Button
             android:id="@+id/LoginButton"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="30dp"
             android:background="@drawable/button_main"
             android:fontFamily="@font/andika"
             android:text="Log In"
@@ -70,9 +81,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTextPW" />
-
-
+            app:layout_constraintTop_toBottomOf="@id/editTextPW" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </ScrollView>
