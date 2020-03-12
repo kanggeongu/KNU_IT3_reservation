@@ -130,15 +130,7 @@
                     </LinearLayout>
 
                     <LinearLayout
-                        android:id="@+id/linearLayoutTextRHomeroom1"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/linearLayoutImageRHomeroom1"
+                        android:id="@+id/linearLayoutRHomeroom1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal" />
@@ -239,13 +231,7 @@
                     </LinearLayout>
 
                     <LinearLayout
-                        android:id="@+id/linearLayoutTextRHomeroom2"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="horizontal" />
-
-                    <LinearLayout
-                        android:id="@+id/linearLayoutImageRHomeroom2"
+                        android:id="@+id/linearLayoutRHomeroom2"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:orientation="horizontal" />
@@ -344,13 +330,7 @@
                     </LinearLayout>
 
                     <LinearLayout
-                        android:id="@+id/linearLayoutTextRHomeroom3"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="horizontal" />
-
-                    <LinearLayout
-                        android:id="@+id/linearLayoutImageRHomeroom3"
+                        android:id="@+id/linearLayoutRHomeroom3"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:orientation="horizontal" />
@@ -450,13 +430,7 @@
                     </LinearLayout>
 
                     <LinearLayout
-                        android:id="@+id/linearLayoutTextRHomeroom4"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="horizontal" />
-
-                    <LinearLayout
-                        android:id="@+id/linearLayoutImageRHomeroom4"
+                        android:id="@+id/linearLayoutRHomeroom4"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:orientation="horizontal" />
@@ -556,13 +530,7 @@
                     </LinearLayout>
 
                     <LinearLayout
-                        android:id="@+id/linearLayoutTextRHomeroom5"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="horizontal" />
-
-                    <LinearLayout
-                        android:id="@+id/linearLayoutImageRHomeroom5"
+                        android:id="@+id/linearLayoutRHomeroom5"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:orientation="horizontal" />

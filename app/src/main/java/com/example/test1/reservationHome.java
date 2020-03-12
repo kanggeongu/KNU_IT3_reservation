@@ -15,6 +15,7 @@ import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -59,11 +60,8 @@ public class reservationHome extends AppCompatActivity implements SwipeRefreshLa
     String stringNow = sdfNow.format(date);
     TextView txvDate2;
 
-
-
-
     LayoutInflater layoutInflater;
-    LinearLayout linearLayoutTextRHome, linearLayoutImageRHome;
+    LinearLayout linearLayoutRHome;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -202,30 +200,37 @@ public class reservationHome extends AppCompatActivity implements SwipeRefreshLa
     }
 
     public void setLayout(final String roomID){
-        String ltv = "linearLayoutTextRHome"+roomID;
-        String liv = "linearLayoutImageRHome"+roomID;
+        String ltv = "linearLayoutRHome"+roomID;
 
-        int ltvID = getResources().getIdentifier(ltv,"id","com.example.test1");
-        int livID = getResources().getIdentifier(liv,"id","com.example.test1");
+        int lID = getResources().getIdentifier(ltv,"id","com.example.test1");
 
-        linearLayoutTextRHome = (LinearLayout) findViewById(ltvID);
-        linearLayoutImageRHome = (LinearLayout) findViewById(livID);
+        linearLayoutRHome = (LinearLayout) findViewById(lID);
 
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT
                 ,1f);
 
-        for(int i=9;i<=23;i++){
-            TextView tv = new TextView(this);
-            tv.setText(String.format("%02d", i));
-            tv.setLayoutParams(layoutParams);
-            tv.setGravity(Gravity.CENTER);
-            Drawable drawble = getResources().getDrawable(R.drawable.border);
-            tv.setBackground(drawble);
-            linearLayoutTextRHome.addView(tv);
-        }
+        LinearLayout.LayoutParams layoutParams2 = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT
+                ,1f);
+
+        int w = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,1,getResources().getDisplayMetrics());
+        linearLayoutRHome.setPadding(w,0,w,0);
 
         for(int i=9;i<=23;i++){
+            LinearLayout wholeLayout = new LinearLayout(this);
+            LinearLayout imageLayout = new LinearLayout(this);
+            wholeLayout.setOrientation(LinearLayout.VERTICAL);
+            wholeLayout.setLayoutParams(layoutParams2);
+            imageLayout.setOrientation(LinearLayout.HORIZONTAL);
+
+            TextView tv = new TextView(this);
+            tv.setText(String.format("%02d", i));
+            tv.setLayoutParams(layoutParams2);
+            tv.setGravity(Gravity.CENTER);
+            tv.setBackgroundResource(R.drawable.border);
+            wholeLayout.addView(tv);
+
             for(int j=0;j<=30;j+=30){
                 ImageView iv = new ImageView(this);
                 iv.setLayoutParams(layoutParams);
@@ -235,8 +240,10 @@ public class reservationHome extends AppCompatActivity implements SwipeRefreshLa
                 iv.setId(a);
                 iv.setImageResource(R.drawable.blank);
                 iv.setBackgroundResource(R.drawable.border_white);
-                linearLayoutImageRHome.addView(iv);
+                imageLayout.addView(iv);
             }
+            wholeLayout.addView(imageLayout);
+            linearLayoutRHome.addView(wholeLayout);
         }
     }
 
@@ -290,7 +297,6 @@ public class reservationHome extends AppCompatActivity implements SwipeRefreshLa
     }
 
     public void changeImageView(final String roomID){
-
         for(int i=900;i<=2330;){
             String temp = "img"+Long.toString(i)+roomID;
             int k = getResources().getIdentifier(temp,"id","com.example.test1");
