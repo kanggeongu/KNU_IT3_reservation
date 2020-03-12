@@ -291,7 +291,6 @@ public class reservationHome extends AppCompatActivity implements SwipeRefreshLa
 
     public void changeImageView(final String roomID){
 
-        Log.e("HomeroomID : ", roomID);
         for(int i=900;i<=2330;){
             String temp = "img"+Long.toString(i)+roomID;
             int k = getResources().getIdentifier(temp,"id","com.example.test1");
@@ -329,16 +328,13 @@ public class reservationHome extends AppCompatActivity implements SwipeRefreshLa
                     String key = iter.next();
                     RData value = room.roomRMap.get(key);
                     String rstime = value.startTime, retime = value.endTime;
-                    Log.e("HomeTime",rstime + " : " + retime);
 
                     if(selectedDate <= Long.parseLong(rstime) && Long.parseLong(retime) < selectedDate + 10000){
                         long tempStart = Long.parseLong(rstime) % 10000;
                         long tempEnd = Long.parseLong(retime) % 10000;
 
-                        Log.e("HomeStart~End",tempStart + " : " + tempEnd);
                         for(long i=tempStart;i<tempEnd;){
                             String temp = "img"+Long.toString(i)+ roomID;
-                            Log.e("HomeImgID", temp);
                             int k = getResources().getIdentifier(temp,"id","com.example.test1");
                             ImageView img = (ImageView) findViewById(k);
                             img.setBackgroundResource(R.drawable.border_black);
