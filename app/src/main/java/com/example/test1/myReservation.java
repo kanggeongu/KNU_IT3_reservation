@@ -127,6 +127,9 @@ public class myReservation extends AppCompatActivity {
     }
 
     public void EmptyView(){
+        LinearLayout l1 = new LinearLayout(this);
+        l1.setOrientation(LinearLayout.HORIZONTAL);
+
         TextView textViewEmpty = new TextView(myReservation.this);
         textViewEmpty.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT));
@@ -137,7 +140,8 @@ public class myReservation extends AppCompatActivity {
         Typeface typeface = ResourcesCompat.getFont(this, R.font.lottemart);
         textViewEmpty.setTypeface(typeface);
 
-        topLayout.addView(textViewEmpty);
+        l1.addView(textViewEmpty);
+        topLayout.addView(l1);
     }
 
     public void ListView(String key, RData rData){
