@@ -2,11 +2,13 @@ package com.example.test1;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.res.ResourcesCompat;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
@@ -151,6 +153,9 @@ public class reservaionRoomList extends AppCompatActivity {
         textViewEmpty.setTextSize(20);
         textViewEmpty.setGravity(Gravity.CENTER);
         textViewEmpty.setText("예약 정보가 없습니다.");
+        Typeface typeface = ResourcesCompat.getFont(this, R.font.lottemart);
+        textViewEmpty.setTypeface(typeface);
+
         topLayout.addView(textViewEmpty);
     }
 
@@ -182,6 +187,8 @@ public class reservaionRoomList extends AppCompatActivity {
             tv.setLayoutParams(layoutParams);
             tv.setGravity(Gravity.CENTER);
             tv.setBackgroundResource(R.drawable.border);
+            Typeface typeface = ResourcesCompat.getFont(this, R.font.lottemart);
+            tv.setTypeface(typeface);
             linearLayoutTextRPage.addView(tv);
         }
 
@@ -215,12 +222,15 @@ public class reservaionRoomList extends AppCompatActivity {
         textViewUser.setText("이름 : " + userName);
         textViewUser.setTextSize(12);
         textViewUser.setGravity(Gravity.CENTER);
+        Typeface typeface = ResourcesCompat.getFont(this, R.font.lottemart);
+        textViewUser.setTypeface(typeface);
         textViewUser.setPadding(10, 20, 10, 20);
 
         TextView tv = new TextView(reservaionRoomList.this);
         tv.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT, 1f));
         tv.setText("아이디 : " + userID);
+        tv.setTypeface(typeface);
         tv.setTextSize(12);
         tv.setGravity(Gravity.CENTER);
         tv.setPadding(10, 20, 10, 20);
@@ -250,6 +260,8 @@ public class reservaionRoomList extends AppCompatActivity {
         textViewTime.setTextSize(15);
         textViewTime.setGravity(Gravity.CENTER);
         textViewTime.setPadding(10, 20, 10, 20);
+        Typeface typeface = ResourcesCompat.getFont(this, R.font.lottemart);
+        textViewTime.setTypeface(typeface);
 
         LinearLayout ll = new LinearLayout(this);
         ll.setGravity(Gravity.CENTER);

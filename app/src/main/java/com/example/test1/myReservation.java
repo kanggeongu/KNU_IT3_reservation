@@ -159,6 +159,9 @@ public class myReservation extends AppCompatActivity {
         textViewRoom.setTextColor(Color.BLACK);
         textViewRoom.setPadding(20,30,20,30);
 
+        Typeface typeface = ResourcesCompat.getFont(this, R.font.lottemart);
+        textViewRoom.setTypeface(typeface);
+
         LinearLayout ll = new LinearLayout(myReservation.this);
         ll.setGravity(Gravity.CENTER);
         ll.addView(textViewRoom);
@@ -184,6 +187,8 @@ public class myReservation extends AppCompatActivity {
             tv.setLayoutParams(layoutParams);
             tv.setGravity(Gravity.CENTER);
             tv.setBackgroundResource(R.drawable.border);
+            Typeface typeface = ResourcesCompat.getFont(this, R.font.lottemart);
+            tv.setTypeface(typeface);
             linearLayoutTextRPage.addView(tv);
         }
 
@@ -218,6 +223,8 @@ public class myReservation extends AppCompatActivity {
         textViewUser.setTextSize(12);
         textViewUser.setGravity(Gravity.CENTER);
         textViewUser.setPadding(10,20,10,20);
+        Typeface typeface = ResourcesCompat.getFont(this, R.font.lottemart);
+        textViewUser.setTypeface(typeface);
 
         TextView tv = new TextView(myReservation.this);
         tv.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
@@ -226,6 +233,7 @@ public class myReservation extends AppCompatActivity {
         tv.setTextSize(12);
         tv.setGravity(Gravity.CENTER);
         tv.setPadding(10,20,10,20);
+        tv.setTypeface(typeface);
 
         LinearLayout ll = new LinearLayout(myReservation.this);
         ll.setOrientation(LinearLayout.HORIZONTAL);
@@ -252,6 +260,8 @@ public class myReservation extends AppCompatActivity {
         textViewTime.setTextSize(15);
         textViewTime.setGravity(Gravity.CENTER);
         textViewTime.setPadding(10,20,10,20);
+        Typeface typeface = ResourcesCompat.getFont(this, R.font.lottemart);
+        textViewTime.setTypeface(typeface);
 
         LinearLayout ll = new LinearLayout(this);
         ll.setGravity(Gravity.CENTER);
@@ -262,10 +272,13 @@ public class myReservation extends AppCompatActivity {
     }
 
     public void attachDeleteButton(final String key, final RData rData){
+        Typeface typeface = ResourcesCompat.getFont(this, R.font.lottemart);
+
         Button buttonDel = new Button(myReservation.this);
         buttonDel.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT));
         buttonDel.setText("삭제");
+        buttonDel.setTypeface(typeface);
         buttonDel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

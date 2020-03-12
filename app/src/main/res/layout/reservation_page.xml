@@ -48,23 +48,19 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:fontFamily="@font/lottemart"
                     android:gravity="center" />
 
                 <Button
                     android:id="@+id/btnDatepicker"
-                    android:layout_width="match_parent"
-                    android:layout_height="45dp"
+                    android:layout_width="100dp"
+                    android:layout_height="50dp"
                     android:layout_marginTop="5dp"
                     android:layout_marginRight="8dp"
                     android:layout_marginBottom="5dp"
-                    android:layout_weight="3.5"
-                    android:background="@drawable/button_main"
-                    android:fontFamily="@font/andika"
-                    android:onClick="OnClickHandler"
-                    android:text="Date"
-                    android:textColor="#000000"
-                    android:textSize="18dp"
-                    android:textStyle="bold" />
+                    android:layout_weight="1"
+                    android:background="@drawable/button_calendar"
+                    android:onClick="OnClickHandler"/>
             </LinearLayout>
 
 
@@ -73,7 +69,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
-
             </LinearLayout>
 
             <LinearLayout
@@ -172,7 +167,8 @@
                             android:fontFamily="@font/lottemart"
                             android:hint="예약자 성명"
                             android:inputType="textPersonName"
-                            android:textAlignment="center" />
+                            android:textAlignment="center"
+                            android:gravity="center_horizontal" />
 
                     </LinearLayout>
 

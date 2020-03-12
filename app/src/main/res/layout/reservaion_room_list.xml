@@ -28,6 +28,7 @@
             android:id="@+id/toolbarTitle1"
             android:textSize="20sp"
             android:textColor="#ffffff"
+            android:fontFamily="@font/lottemart"
             />
 
     </androidx.appcompat.widget.Toolbar>
@@ -47,25 +48,21 @@
 
                 <TextView
                     android:id="@+id/txvDate"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="6"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/lottemart"
                     android:gravity="center" />
 
                 <Button
                     android:id="@+id/btnDatepicker"
-                    android:layout_width="55dp"
-                    android:layout_height="45dp"
+                    android:layout_width="100dp"
+                    android:layout_height="50dp"
                     android:layout_marginTop="5dp"
                     android:layout_marginRight="8dp"
                     android:layout_marginBottom="5dp"
                     android:layout_weight="1"
-                    android:background="@drawable/button_main"
-                    android:fontFamily="@font/andika"
-                    android:text="Date"
-                    android:textColor="#000000"
-                    android:textSize="18dp"
-                    android:textStyle="bold" />
+                    android:background="@drawable/button_calendar"/>
             </LinearLayout>
 
             <LinearLayout
