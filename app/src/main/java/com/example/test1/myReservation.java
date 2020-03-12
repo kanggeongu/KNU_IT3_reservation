@@ -14,6 +14,7 @@ import android.graphics.Typeface;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -48,6 +49,7 @@ public class myReservation extends AppCompatActivity {
     long now = System.currentTimeMillis();
     Date date = new Date(now);
     String stringNow = sdfNow.format(date);
+    int dp;
 
     LinearLayout topLayout;
     LinearLayout childLayout;
@@ -72,6 +74,7 @@ public class myReservation extends AppCompatActivity {
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference();
 
+        dp = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,1,getResources().getDisplayMetrics());
         user = (User)getIntent().getSerializableExtra("user");
     }
 
@@ -165,54 +168,60 @@ public class myReservation extends AppCompatActivity {
         LinearLayout ll = new LinearLayout(myReservation.this);
         ll.setGravity(Gravity.CENTER);
         ll.addView(textViewRoom);
-        ll.setBackgroundResource(R.drawable.border_tv);
+        ll.setBackgroundResource(R.drawable.layoutborder);
         childLayout.addView(ll);
     }
 
     public void attachTimeTable(RData rData){
-
-        LinearLayout linearLayoutTextRPage = new LinearLayout(myReservation.this);
-        linearLayoutTextRPage.setOrientation(LinearLayout.HORIZONTAL);
-
-        LinearLayout linearLayoutImageRPage = new LinearLayout(myReservation.this);
-        linearLayoutImageRPage.setOrientation(LinearLayout.HORIZONTAL);
-
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT
                 ,1f);
 
-        for(int i=9;i<=23;i++){
-            TextView tv = new TextView(this);
-            tv.setText(String.format("%02d", i));
-            tv.setLayoutParams(layoutParams);
-            tv.setGravity(Gravity.CENTER);
-            tv.setBackgroundResource(R.drawable.border);
-            Typeface typeface = ResourcesCompat.getFont(this, R.font.lottemart);
-            tv.setTypeface(typeface);
-            linearLayoutTextRPage.addView(tv);
-        }
+        LinearLayout.LayoutParams layoutParams2 = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT
+                ,1f);
+
+        LinearLayout timeTableLayout = new LinearLayout(myReservation.this);
+        timeTableLayout.setOrientation(LinearLayout.HORIZONTAL);
+        timeTableLayout.setLayoutParams(layoutParams2);
+
+        timeTableLayout.setPadding(dp,0,dp,0);
 
         long sTime = Long.parseLong(rData.startTime);
         long eTime = Long.parseLong(rData.endTime);
         long Date = sTime / 10000 * 10000;
 
         for(int i=9;i<=23;i++){
+            LinearLayout wholeLayout = new LinearLayout(this);
+            LinearLayout imageLayout = new LinearLayout(this);
+            wholeLayout.setOrientation(LinearLayout.VERTICAL);
+            wholeLayout.setLayoutParams(layoutParams2);
+            imageLayout.setOrientation(LinearLayout.HORIZONTAL);
+
+            TextView tv = new TextView(this);
+            tv.setText(String.format("%02d", i));
+            tv.setLayoutParams(layoutParams2);
+            tv.setGravity(Gravity.CENTER);
+            tv.setBackgroundResource(R.drawable.border);
+            wholeLayout.addView(tv);
+
             for(int j=0;j<=30;j+=30){
                 ImageView iv = new ImageView(this);
                 iv.setLayoutParams(layoutParams);
-                int k = i*100+j;
+                int k = i * 100 + j;
                 iv.setImageResource(R.drawable.blank);
 
-                if(sTime <= Date + k && Date + k < eTime)
+                if (sTime <= Date + k && Date + k < eTime)
                     iv.setBackgroundResource(R.drawable.border_black);
                 else
                     iv.setBackgroundResource(R.drawable.border_white);
-                linearLayoutImageRPage.addView(iv);
+                imageLayout.addView(iv);
             }
+            wholeLayout.addView(imageLayout);
+            timeTableLayout.addView(wholeLayout);
         }
-
-        childLayout.addView(linearLayoutTextRPage);
-        childLayout.addView(linearLayoutImageRPage);
+        timeTableLayout.setBackgroundResource(R.drawable.layoutborder_middle);
+        childLayout.addView(timeTableLayout);
     }
 
     public void attachUser(String userName, String userID){
@@ -240,7 +249,7 @@ public class myReservation extends AppCompatActivity {
         ll.setGravity(Gravity.CENTER);
         ll.addView(textViewUser);
         ll.addView(tv);
-        ll.setBackgroundResource(R.drawable.border_tv);
+        ll.setBackgroundResource(R.drawable.layoutborder_middle);
         childLayout.addView(ll);
     }
 
@@ -266,7 +275,7 @@ public class myReservation extends AppCompatActivity {
         LinearLayout ll = new LinearLayout(this);
         ll.setGravity(Gravity.CENTER);
         ll.addView(textViewTime);
-        ll.setBackgroundResource(R.drawable.border_tv);
+        ll.setBackgroundResource(R.drawable.layoutborder_middle);
 
         childLayout.addView(ll);
     }
@@ -278,7 +287,9 @@ public class myReservation extends AppCompatActivity {
         buttonDel.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT));
         buttonDel.setText("삭제");
+        buttonDel.setTextColor(Color.WHITE);
         buttonDel.setTypeface(typeface);
+        buttonDel.setBackgroundResource(R.drawable.button_home);
         buttonDel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -300,7 +311,8 @@ public class myReservation extends AppCompatActivity {
         LinearLayout ll = new LinearLayout(this);
         ll.setGravity(Gravity.CENTER);
         ll.addView(buttonDel);
-        ll.setBackgroundResource(R.drawable.border_tv);
+        ll.setPadding(100*dp,0,100*dp,20*dp);
+        ll.setBackgroundResource(R.drawable.layoutborder_end);
         childLayout.addView(ll);
     }
 
