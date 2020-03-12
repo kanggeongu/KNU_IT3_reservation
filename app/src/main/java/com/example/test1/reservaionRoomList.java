@@ -40,7 +40,6 @@ public class reservaionRoomList extends AppCompatActivity {
 
     int ny = 0, nm = 0, nd = 0;
     long selectedDate;
-
     LinearLayout topLayout;
     LinearLayout childLayout;
 
