@@ -364,6 +364,7 @@ public class reservationPage extends AppCompatActivity {
 
     @Override
     public void onBackPressed(){
+        ((reservationHome)reservationHome.HomeContext).onRefresh();
         startLoading();
         finish();
     }

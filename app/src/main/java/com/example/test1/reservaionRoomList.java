@@ -4,21 +4,20 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.res.ResourcesCompat;
 
-import android.app.AlertDialog;
 import android.app.DatePickerDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.util.Log;
+import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -42,6 +41,8 @@ public class reservaionRoomList extends AppCompatActivity {
     long selectedDate;
     LinearLayout topLayout;
     LinearLayout childLayout;
+    LinearLayout emptyLayout;
+    int dp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +61,10 @@ public class reservaionRoomList extends AppCompatActivity {
 
         toolbarTitle1 = (TextView) findViewById(R.id.toolbarTitle1);
         room = (Room) getIntent().getSerializableExtra("room");
+        dp = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,1,getResources().getDisplayMetrics());
 
+        topLayout = (LinearLayout)findViewById(R.id.linear1);
+        emptyLayout = (LinearLayout)findViewById(R.id.emptyLayout);
         toolbarTitle1.setText(room.roomID);
         txvDate = (TextView) findViewById(R.id.txvDate);
 
@@ -110,7 +114,11 @@ public class reservaionRoomList extends AppCompatActivity {
     }
 
     public void changeView() {
-        topLayout = (LinearLayout) findViewById(R.id.linear1);
+        emptyLayout.removeAllViews();
+        emptyLayout.setLayoutParams(new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+        ));
         topLayout.removeAllViews();
 
         databaseReference.child("Rooms").child(room.roomID).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -146,21 +154,32 @@ public class reservaionRoomList extends AppCompatActivity {
     }
 
     public void EmptyView() {
+        emptyLayout.removeAllViews();
+        emptyLayout.setLayoutParams(new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.MATCH_PARENT
+        ));
+        topLayout.removeAllViews();
+
         TextView textViewEmpty = new TextView(reservaionRoomList.this);
-        textViewEmpty.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT));
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+        );
+        textViewEmpty.setLayoutParams(params);
+
         textViewEmpty.setTextSize(20);
         textViewEmpty.setGravity(Gravity.CENTER);
         textViewEmpty.setText("예약 정보가 없습니다.");
         Typeface typeface = ResourcesCompat.getFont(this, R.font.lottemart);
         textViewEmpty.setTypeface(typeface);
-
-        topLayout.addView(textViewEmpty);
+        emptyLayout.addView(textViewEmpty);
     }
 
     public void ListView(String key, RData rData) {
         childLayout = new LinearLayout(reservaionRoomList.this);
         childLayout.setOrientation(LinearLayout.VERTICAL);
+        attachTop();
         attachTimeTable(rData);
         attachUser(rData.userName, rData.userID);
         attachTime(rData.startTime, rData.endTime);
@@ -168,35 +187,61 @@ public class reservaionRoomList extends AppCompatActivity {
         topLayout.addView(childLayout);
     }
 
+    public void attachTop(){
+        TextView textView = new TextView(reservaionRoomList.this);
+        textView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT));
+
+        textView.setText("예약정보");
+        textView.setGravity(Gravity.CENTER);
+        textView.setTextSize(20);
+        textView.setTextColor(Color.BLACK);
+        textView.setPadding(20,30,20,30);
+
+        Typeface typeface = ResourcesCompat.getFont(this, R.font.lottemart);
+        textView.setTypeface(typeface);
+
+        LinearLayout ll = new LinearLayout(reservaionRoomList.this);
+        ll.setGravity(Gravity.CENTER);
+        ll.addView(textView);
+        ll.setBackgroundResource(R.drawable.layoutborder);
+        childLayout.addView(ll);
+    }
+
     public void attachTimeTable(RData rData) {
-
-        LinearLayout linearLayoutTextRPage = new LinearLayout(reservaionRoomList.this);
-        linearLayoutTextRPage.setOrientation(LinearLayout.HORIZONTAL);
-
-        LinearLayout linearLayoutImageRPage = new LinearLayout(reservaionRoomList.this);
-        linearLayoutImageRPage.setOrientation(LinearLayout.HORIZONTAL);
-
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT
-                , 1f);
+                ,1f);
 
-        for (int i = 9; i <= 23; i++) {
-            TextView tv = new TextView(this);
-            tv.setText(String.format("%02d", i));
-            tv.setLayoutParams(layoutParams);
-            tv.setGravity(Gravity.CENTER);
-            tv.setBackgroundResource(R.drawable.border);
-            Typeface typeface = ResourcesCompat.getFont(this, R.font.lottemart);
-            tv.setTypeface(typeface);
-            linearLayoutTextRPage.addView(tv);
-        }
+        LinearLayout.LayoutParams layoutParams2 = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT
+                ,1f);
+
+        LinearLayout timeTableLayout = new LinearLayout(reservaionRoomList.this);
+        timeTableLayout.setOrientation(LinearLayout.HORIZONTAL);
+        timeTableLayout.setLayoutParams(layoutParams2);
+
+        timeTableLayout.setPadding(dp,0,dp,0);
 
         long sTime = Long.parseLong(rData.startTime);
         long eTime = Long.parseLong(rData.endTime);
         long Date = sTime / 10000 * 10000;
 
-        for (int i = 9; i <= 23; i++) {
-            for (int j = 0; j <= 30; j += 30) {
+        for(int i=9;i<=23;i++){
+            LinearLayout wholeLayout = new LinearLayout(this);
+            LinearLayout imageLayout = new LinearLayout(this);
+            wholeLayout.setOrientation(LinearLayout.VERTICAL);
+            wholeLayout.setLayoutParams(layoutParams2);
+            imageLayout.setOrientation(LinearLayout.HORIZONTAL);
+
+            TextView tv = new TextView(this);
+            tv.setText(String.format("%02d", i));
+            tv.setLayoutParams(layoutParams2);
+            tv.setGravity(Gravity.CENTER);
+            tv.setBackgroundResource(R.drawable.border);
+            wholeLayout.addView(tv);
+
+            for(int j=0;j<=30;j+=30){
                 ImageView iv = new ImageView(this);
                 iv.setLayoutParams(layoutParams);
                 int k = i * 100 + j;
@@ -206,12 +251,13 @@ public class reservaionRoomList extends AppCompatActivity {
                     iv.setBackgroundResource(R.drawable.border_black);
                 else
                     iv.setBackgroundResource(R.drawable.border_white);
-                linearLayoutImageRPage.addView(iv);
+                imageLayout.addView(iv);
             }
+            wholeLayout.addView(imageLayout);
+            timeTableLayout.addView(wholeLayout);
         }
-
-        childLayout.addView(linearLayoutTextRPage);
-        childLayout.addView(linearLayoutImageRPage);
+        timeTableLayout.setBackgroundResource(R.drawable.layoutborder_middle);
+        childLayout.addView(timeTableLayout);
     }
 
     public void attachUser(String userName, String userID) {
@@ -239,7 +285,7 @@ public class reservaionRoomList extends AppCompatActivity {
         ll.setGravity(Gravity.CENTER);
         ll.addView(textViewUser);
         ll.addView(tv);
-        ll.setBackgroundResource(R.drawable.border_tv);
+        ll.setBackgroundResource(R.drawable.layoutborder_middle);
         childLayout.addView(ll);
     }
 
@@ -265,13 +311,14 @@ public class reservaionRoomList extends AppCompatActivity {
         LinearLayout ll = new LinearLayout(this);
         ll.setGravity(Gravity.CENTER);
         ll.addView(textViewTime);
-        ll.setBackgroundResource(R.drawable.border_tv);
+        ll.setBackgroundResource(R.drawable.layoutborder_end);
 
         childLayout.addView(ll);
     }
 
     @Override
     public void onBackPressed(){
+        ((reservationHome)reservationHome.HomeContext).onRefresh();
         startLoading();
         finish();
     }

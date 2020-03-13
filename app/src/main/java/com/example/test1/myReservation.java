@@ -3,27 +3,19 @@ package com.example.test1;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.res.ResourcesCompat;
-import androidx.viewpager2.widget.ViewPager2;
 
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
-import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ExpandableListView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -53,6 +45,7 @@ public class myReservation extends AppCompatActivity {
 
     LinearLayout topLayout;
     LinearLayout childLayout;
+    LinearLayout emptyLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,12 +67,19 @@ public class myReservation extends AppCompatActivity {
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference();
 
+        topLayout = (LinearLayout)findViewById(R.id.linear2);
+        emptyLayout = (LinearLayout)findViewById(R.id.emptyLayout2);
+
         dp = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,1,getResources().getDisplayMetrics());
         user = (User)getIntent().getSerializableExtra("user");
     }
 
     public void func(){
-        topLayout = (LinearLayout)findViewById(R.id.linear1);
+        emptyLayout.removeAllViews();
+        emptyLayout.setLayoutParams(new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+        ));
         topLayout.removeAllViews();
 
         databaseReference.child("Users").child(user.userID).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -127,8 +127,10 @@ public class myReservation extends AppCompatActivity {
     }
 
     public void EmptyView(){
-        LinearLayout l1 = new LinearLayout(this);
-        l1.setOrientation(LinearLayout.HORIZONTAL);
+        emptyLayout.setLayoutParams(new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.MATCH_PARENT
+        ));
 
         TextView textViewEmpty = new TextView(myReservation.this);
         textViewEmpty.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
@@ -140,8 +142,7 @@ public class myReservation extends AppCompatActivity {
         Typeface typeface = ResourcesCompat.getFont(this, R.font.lottemart);
         textViewEmpty.setTypeface(typeface);
 
-        l1.addView(textViewEmpty);
-        topLayout.addView(l1);
+        emptyLayout.addView(textViewEmpty);
     }
 
     public void ListView(String key, RData rData){
@@ -361,6 +362,7 @@ public class myReservation extends AppCompatActivity {
 
     @Override
     public void onBackPressed(){
+        ((reservationHome)reservationHome.HomeContext).onRefresh();
         startLoading();
         finish();
     }
