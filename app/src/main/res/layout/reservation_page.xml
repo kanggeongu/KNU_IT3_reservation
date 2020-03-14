@@ -49,6 +49,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:fontFamily="@font/lottemart"
+                    android:textSize="20dp"
+                    android:layout_gravity="center"
                     android:gravity="center" />
 
                 <Button
