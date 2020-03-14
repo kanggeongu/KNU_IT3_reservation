@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.test1">
+    package="com.knu.test1">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -11,19 +11,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".reservaionRoomList"
+        <activity android:name="com.knu.test1.reservaionRoomList"
             android:launchMode="singleTask"></activity>
-        <activity android:name=".Loading" />
+        <activity android:name="com.knu.test1.Loading" />
         <activity
-            android:name=".reservationHome"
+            android:name="com.knu.test1.reservationHome"
             android:launchMode="singleTask" />
         <activity
-            android:name=".myReservation"
+            android:name="com.knu.test1.myReservation"
             android:launchMode="singleTask" />
         <activity
-            android:name=".reservationPage"
+            android:name="com.knu.test1.reservationPage"
             android:launchMode="singleTask" />
-        <activity android:name=".MainActivity">
+        <activity android:name="com.knu.test1.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

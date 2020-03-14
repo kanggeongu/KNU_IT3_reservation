@@ -1,20 +1,16 @@
-package com.example.test1;
+package com.knu.test1;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -31,7 +27,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.lang.reflect.Field;
-import java.sql.Time;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -107,7 +102,7 @@ public class reservationPage extends AppCompatActivity {
                 iv.setLayoutParams(layoutParams);
                 int k = i*100+j;
                 String temp = "img"+Integer.toString(k);
-                int a = getResources().getIdentifier(temp,"id","com.example.test1");
+                int a = getResources().getIdentifier(temp,"id","com.knu.test1");
                 iv.setId(a);
                 iv.setImageResource(R.drawable.blank);
                 iv.setBackgroundResource(R.drawable.border_white);
@@ -323,7 +318,7 @@ public class reservationPage extends AppCompatActivity {
     public void changeImageView(){
         for(int i=900;i<=2330;){
             String temp = "img"+Long.toString(i);
-            int k = getResources().getIdentifier(temp,"id","com.example.test1");
+            int k = getResources().getIdentifier(temp,"id","com.knu.test1");
             ImageView img = (ImageView) findViewById(k);
             img.setBackgroundResource(R.drawable.border_white);
             if(i%100==0) i+=30;
@@ -345,7 +340,7 @@ public class reservationPage extends AppCompatActivity {
                         long tempEnd = Long.parseLong(retime) % 10000;
                         for(long i=tempStart;i<tempEnd;){
                             String temp = "img"+Long.toString(i);
-                            int k = getResources().getIdentifier(temp,"id","com.example.test1");
+                            int k = getResources().getIdentifier(temp,"id","com.knu.test1");
                             ImageView img = (ImageView) findViewById(k);
                             img.setBackgroundResource(R.drawable.border_black);
                             if(i%100==0) i+=30;

@@ -1,9 +1,10 @@
-package com.example.test1;
+package com.knu.test1;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.os.Handler;
+
 
 public class Loading extends AppCompatActivity {
 

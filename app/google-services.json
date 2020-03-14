@@ -10,7 +10,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:666880708282:android:dc26b2d87819a64f283c83",
         "android_client_info": {
-          "package_name": "com.example.test1"
+          "package_name": "com.knu.test1"
         }
       },
       "oauth_client": [
@@ -18,7 +18,7 @@
           "client_id": "666880708282-jrpvdbkvfquak26pq9un1h8toissdh3r.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.test1",
+            "package_name": "com.knu.test1",
             "certificate_hash": "773a8b4fcd7bb39929c941800ea52157c29995d0"
           }
         },

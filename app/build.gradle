@@ -5,7 +5,7 @@ android {
     compileSdkVersion 28
     buildToolsVersion "29.0.3"
     defaultConfig {
-        applicationId "com.example.test1"
+        applicationId "com.knu.test1"
         minSdkVersion 16
         targetSdkVersion 28
         versionCode 1

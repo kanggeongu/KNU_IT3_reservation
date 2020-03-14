@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".myReservation">
+    tools:context="com.knu.test1.myReservation">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"

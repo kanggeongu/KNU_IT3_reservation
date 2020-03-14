@@ -1,4 +1,4 @@
-package com.example.test1;
+package com.knu.test1;
 
 import android.content.Context;
 

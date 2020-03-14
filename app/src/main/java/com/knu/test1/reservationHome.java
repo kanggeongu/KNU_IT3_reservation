@@ -1,34 +1,24 @@
-package com.example.test1;
+package com.knu.test1;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.res.ResourcesCompat;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import android.app.ActionBar;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Typeface;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.DatePicker;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.Toolbar;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -73,11 +63,6 @@ public class reservationHome extends AppCompatActivity implements SwipeRefreshLa
         initView();
         initializeListener();
         InitializeOther();
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
     }
 
     public void startLoading(){
@@ -202,7 +187,7 @@ public class reservationHome extends AppCompatActivity implements SwipeRefreshLa
     public void setLayout(final String roomID){
         String ltv = "linearLayoutRHome"+roomID;
 
-        int lID = getResources().getIdentifier(ltv,"id","com.example.test1");
+        int lID = getResources().getIdentifier(ltv,"id","com.knu.test1");
 
         linearLayoutRHome = (LinearLayout) findViewById(lID);
 
@@ -236,7 +221,7 @@ public class reservationHome extends AppCompatActivity implements SwipeRefreshLa
                 iv.setLayoutParams(layoutParams);
                 int k = i*100+j;
                 String temp = "img"+Integer.toString(k)+roomID;
-                int a = getResources().getIdentifier(temp,"id","com.example.test1");
+                int a = getResources().getIdentifier(temp,"id","com.knu.test1");
                 iv.setId(a);
                 iv.setImageResource(R.drawable.blank);
                 iv.setBackgroundResource(R.drawable.border_white);
@@ -299,7 +284,7 @@ public class reservationHome extends AppCompatActivity implements SwipeRefreshLa
     public void changeImageView(final String roomID){
         for(int i=900;i<=2330;){
             String temp = "img"+Long.toString(i)+roomID;
-            int k = getResources().getIdentifier(temp,"id","com.example.test1");
+            int k = getResources().getIdentifier(temp,"id","com.knu.test1");
             ImageView img = (ImageView) findViewById(k);
             img.setBackgroundResource(R.drawable.border_white);
             if(i%100==0) i+=30;
@@ -341,7 +326,7 @@ public class reservationHome extends AppCompatActivity implements SwipeRefreshLa
 
                         for(long i=tempStart;i<tempEnd;){
                             String temp = "img"+Long.toString(i)+ roomID;
-                            int k = getResources().getIdentifier(temp,"id","com.example.test1");
+                            int k = getResources().getIdentifier(temp,"id","com.knu.test1");
                             ImageView img = (ImageView) findViewById(k);
                             img.setBackgroundResource(R.drawable.border_black);
                             if(i%100==0) i+=30;

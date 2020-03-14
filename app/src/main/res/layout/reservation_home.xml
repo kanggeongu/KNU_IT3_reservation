@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".reservationHome">
+    tools:context="com.knu.test1.reservationHome">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -25,7 +25,7 @@
             android:fontFamily="@font/lottemart"
             android:text="IT-3 강의실 예약"
             android:textColor="#ffffff"
-            android:textSize="24dp" />
+            android:textSize="25dp" />
 
     </androidx.appcompat.widget.Toolbar>
 
