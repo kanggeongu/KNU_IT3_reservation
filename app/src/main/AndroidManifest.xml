@@ -11,19 +11,23 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.knu.test1.reservaionRoomList"
-            android:launchMode="singleTask"></activity>
-        <activity android:name="com.knu.test1.Loading" />
+        <activity android:name=".adminPage"
+            android:launchMode="singleTask">
+        </activity>
         <activity
-            android:name="com.knu.test1.reservationHome"
+            android:name=".reservaionRoomList"
+            android:launchMode="singleTask" />
+        <activity android:name=".Loading" />
+        <activity
+            android:name=".reservationHome"
             android:launchMode="singleTask" />
         <activity
-            android:name="com.knu.test1.myReservation"
+            android:name=".myReservation"
             android:launchMode="singleTask" />
         <activity
-            android:name="com.knu.test1.reservationPage"
+            android:name=".reservationPage"
             android:launchMode="singleTask" />
-        <activity android:name="com.knu.test1.MainActivity">
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

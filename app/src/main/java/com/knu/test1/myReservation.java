@@ -46,6 +46,7 @@ public class myReservation extends AppCompatActivity {
     LinearLayout topLayout;
     LinearLayout childLayout;
     LinearLayout emptyLayout;
+    LinearLayout adminLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +55,7 @@ public class myReservation extends AppCompatActivity {
 
         startLoading();
         init();
+        addManagement();
         func();
     }
 
@@ -69,9 +71,40 @@ public class myReservation extends AppCompatActivity {
 
         topLayout = (LinearLayout)findViewById(R.id.linear2);
         emptyLayout = (LinearLayout)findViewById(R.id.emptyLayout2);
+        adminLayout = (LinearLayout)findViewById(R.id.adminLayout);
 
         dp = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,1,getResources().getDisplayMetrics());
         user = (User)getIntent().getSerializableExtra("user");
+    }
+
+    public void addManagement(){
+        adminLayout.removeAllViews();
+        if(user.userID.equals("110")){
+            Button adminButton = new Button(myReservation.this);
+
+            LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.WRAP_CONTENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT
+            );
+            lp.setMargins(0,20,0,0);
+            adminButton.setLayoutParams(lp);
+
+            adminButton.setBackgroundResource(R.drawable.button_main);
+            adminButton.setText("관리");
+            adminButton.setTextSize(18);
+            Typeface typeface = ResourcesCompat.getFont(this, R.font.lottemart);
+            adminButton.setTypeface(typeface);
+
+            adminButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(getApplicationContext(),adminPage.class);
+                    startActivity(intent);
+                }
+            });
+
+            adminLayout.addView(adminButton);
+        }
     }
 
     public void func(){
