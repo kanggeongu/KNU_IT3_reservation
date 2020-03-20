@@ -205,6 +205,7 @@ public class reservationPage extends AppCompatActivity {
 
         stime = selectedDate+shour*100+(smin % 2==0? 0: 30);
         etime = selectedDate+ehour*100+(emin % 2==0?0:30);
+        if(stime % 10000 == 0) stime += 2400;
         if(etime % 10000 == 0) etime += 2400;
 
         if(stime + 30 <= Long.parseLong(stringNow)){

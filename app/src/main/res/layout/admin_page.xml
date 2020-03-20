@@ -79,15 +79,6 @@
                         android:text="104" />
 
                     <CheckBox
-                        android:id="@+id/checkbox105"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:checked="false"
-                        android:onClick="OnCheckBoxClicked"
-                        android:text="105" />
-
-                    <CheckBox
                         android:id="@+id/checkbox106"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -95,6 +86,15 @@
                         android:checked="false"
                         android:onClick="OnCheckBoxClicked"
                         android:text="106" />
+
+                    <CheckBox
+                        android:id="@+id/checkbox111"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:checked="false"
+                        android:onClick="OnCheckBoxClicked"
+                        android:text="111" />
 
                     <CheckBox
                         android:id="@+id/checkbox413"
@@ -256,7 +256,6 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight="2"
-                            android:ems="10"
                             android:fontFamily="@font/lottemart"
                             android:gravity="center_horizontal"
                             android:hint="예약자 성명"

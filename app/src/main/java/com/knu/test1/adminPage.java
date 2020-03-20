@@ -1,10 +1,11 @@
 package com.knu.test1;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -25,7 +26,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Vector;
 
@@ -34,7 +34,7 @@ public class adminPage extends AppCompatActivity implements DatePickerDialog.OnD
     DatabaseReference databaseReference;
 
     Button btnDateRangePicker;
-    TextView txvStartDate, txvEndDate;
+    TextView txvStartDate, txvEndDate, editTextUserName;
     TimePicker startTimepicker, endTimepicker;
 
     int ny =0, nm=0, nd=0;
@@ -73,33 +73,56 @@ public class adminPage extends AppCompatActivity implements DatePickerDialog.OnD
                 dpd.show(getFragmentManager(), "Datepickerdialog");
                 break;
             case R.id.btnReservation:
-                submit();
+                new android.app.AlertDialog.Builder(adminPage.this)
+                        .setTitle("")
+                        .setMessage("정말 예약하시겠습니까?")
+                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int whichButton) {
+                                submit();
+                            }})
+                        .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int whichButton) {
+                                Toast.makeText(adminPage.this, "취소하였습니다.", Toast.LENGTH_SHORT).show();
+                            }})
+                        .show();
                 break;
         }
     }
 
     public void OnCheckBoxClicked(View v){
-        boolean checked = ((CheckBox) v).isChecked();
+        //boolean checked = ((CheckBox) v).isChecked();
+        for(int i=0;i<5;i++) isRoomChecked[i]=false;
+        CheckBox checkBox103 = (CheckBox)findViewById(R.id.checkbox103);
+        checkBox103.setChecked(false);
+        CheckBox checkBox104 = (CheckBox)findViewById(R.id.checkbox104);
+        checkBox104.setChecked(false);
+        CheckBox checkBox106 = (CheckBox)findViewById(R.id.checkbox106);
+        checkBox106.setChecked(false);
+        CheckBox checkBox111 = (CheckBox)findViewById(R.id.checkbox111);
+        checkBox111.setChecked(false);
+        CheckBox checkBox413 = (CheckBox)findViewById(R.id.checkbox413);
+        checkBox413.setChecked(false);
+
         switch(v.getId()){
             case R.id.checkbox103:
-                if(checked) isRoomChecked[0] = true;
-                else isRoomChecked[0] = false;
+                isRoomChecked[0] = true;
+                checkBox103.setChecked(true);
                 break;
             case R.id.checkbox104:
-                if(checked) isRoomChecked[1] = true;
-                else isRoomChecked[1] = false;
-                break;
-            case R.id.checkbox105:
-                if(checked) isRoomChecked[2] = true;
-                else isRoomChecked[2] = false;
+                isRoomChecked[1] = true;
+                checkBox104.setChecked(true);
                 break;
             case R.id.checkbox106:
-                if(checked) isRoomChecked[3] = true;
-                else isRoomChecked[3] = false;
+                isRoomChecked[2] = true;
+                checkBox106.setChecked(true);
+                break;
+            case R.id.checkbox111:
+                isRoomChecked[3] = true;
+                checkBox111.setChecked(true);
                 break;
             case R.id.checkbox413:
-                if(checked) isRoomChecked[4] = true;
-                else isRoomChecked[4] = false;
+                isRoomChecked[4] = true;
+                checkBox413.setChecked(true);
                 break;
 
         }
@@ -113,6 +136,7 @@ public class adminPage extends AppCompatActivity implements DatePickerDialog.OnD
         btnDateRangePicker = (Button) findViewById(R.id.btnDateRangePicker);
         txvEndDate = (TextView) findViewById(R.id.txvEndDate);
         txvStartDate = (TextView) findViewById(R.id.txvStartDate);
+        editTextUserName = (TextView)findViewById(R.id.editTextUserName);
         startTimepicker = (TimePicker)findViewById(R.id.startTimepicker);
         endTimepicker = (TimePicker)findViewById(R.id.endTimepicker);
 
@@ -170,13 +194,23 @@ public class adminPage extends AppCompatActivity implements DatePickerDialog.OnD
         return Long.parseLong(sdf.format(date))*10000;
     }
 
+    String getRoomID(int idx){
+        String roomID = "103";
+        if(idx==1) roomID = "104";
+        else if(idx == 2) roomID = "106";
+        else if(idx==3) roomID = "111";
+        else if(idx==4) roomID = "413";
+        return roomID;
+    }
+
+
     public void submit(){
         if(selectedDateStart > selectedDateEnd){
             Toast.makeText(this.getApplicationContext(),"날짜 세팅 오류",Toast.LENGTH_LONG).show();
             return;
         }
 
-        Vector<Long> dates = new Vector<>();
+        final Vector<Long> dates = new Vector<>();
 
         long syear, smonth, sdate;
         long eyear, emonth, edate;
@@ -196,8 +230,13 @@ public class adminPage extends AppCompatActivity implements DatePickerDialog.OnD
 
         while(true){
             dates.add(getDateByLong(calendar.getTime()));
-            calendar.add(Calendar.DATE, 1);
+            calendar.add(Calendar.DATE, 7);
             if(getDateByLong(calendar.getTime())>selectedDateEnd) break;
+        }
+
+        if(editTextUserName.getText().toString().equals("")){
+            Toast.makeText(this.getApplicationContext(), "이름을 입력하세요.", Toast.LENGTH_LONG).show();
+            return;
         }
 
         boolean isRoomSelected=false;
@@ -212,16 +251,15 @@ public class adminPage extends AppCompatActivity implements DatePickerDialog.OnD
             return;
         }
 
-        long stime, etime;
-        long shour, smin, ehour, emin;
-
-        shour = startTimepicker.getCurrentHour();
-        smin = startTimepicker.getCurrentMinute();
-        ehour = endTimepicker.getCurrentHour();
-        emin = endTimepicker.getCurrentMinute();
+        final long shour = startTimepicker.getCurrentHour();
+        final long smin = startTimepicker.getCurrentMinute();
+        final long ehour = endTimepicker.getCurrentHour();
+        final long emin = endTimepicker.getCurrentMinute();
 
         long tempTimeStart = selectedDateStart+shour*100+(smin % 2==0? 0: 30);
         long tempTimeEnd = selectedDateStart+ehour*100+(emin % 2==0? 0: 30);
+        if(tempTimeStart % 10000 == 0) tempTimeStart += 2400;
+        if(tempTimeEnd % 10000 == 0) tempTimeEnd += 2400;
 
         if(tempTimeStart + 30 <= Long.parseLong(stringNow)){
             Toast.makeText(this.getApplicationContext(),"현재 시간보다 이후로 예약을 해주십시오.",Toast.LENGTH_LONG).show();
@@ -236,29 +274,66 @@ public class adminPage extends AppCompatActivity implements DatePickerDialog.OnD
             return;
         }
 
-        for(int i=0;i<dates.size();i++){
-            Long d = dates.get(i);
-            stime = d+shour*100+(smin % 2==0? 0: 30);
-            etime = d+ehour*100+(emin % 2==0?0:30);
+        databaseReference.child("Users").child("110").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull final DataSnapshot dataSnapshot1) {
 
-            startTime = String.valueOf(stime);
-            endTime = String.valueOf(etime);
-            for(int j=0;j<5;j++){
-                if(isRoomChecked[j]){
-                    databaseReference.child("Rooms").child(String.valueOf(rooms[j])).addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for(int j=0;j<5;j++){
+                    if(isRoomChecked[j]){
+                        final String roomID = getRoomID(j);
 
-                        }
+                        databaseReference.child("Rooms").child(String.valueOf(rooms[j])).addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot2) {
+                                User user = dataSnapshot1.getValue(User.class);
+                                Room room = dataSnapshot2.getValue(Room.class);
 
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError databaseError) {
+                                for(int i=0;i<dates.size();i++){
+                                    Long d = dates.get(i);
+                                    long stime = d+shour*100+(smin % 2==0? 0: 30);
+                                    long etime = d+ehour*100+(emin % 2==0?0:30);
+                                    if(stime == 0) stime += 2400;
+                                    if(etime == 0) etime += 2400;
 
-                        }
-                    });
+                                    startTime = String.valueOf(stime);
+                                    endTime = String.valueOf(etime);
+                                    RData rData = new RData(startTime, endTime, "110", editTextUserName.getText().toString());
+                                    room.pushData(roomID, rData);
+                                    user.pushData(roomID, rData);
+                                }
+
+                                databaseReference.child("Rooms").child(room.roomID).setValue(room);
+                                databaseReference.child("Users").child(user.userID).setValue(user);
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                            }
+                        });
+
+                        break;
+                    }
                 }
             }
-        }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        new AlertDialog.Builder(adminPage.this)
+                .setTitle("")
+                .setMessage("예약 완료")
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                })
+                .show();
+
     }
 
     @Override
