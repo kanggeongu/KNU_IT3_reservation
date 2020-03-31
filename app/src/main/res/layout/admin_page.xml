@@ -111,6 +111,67 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <CheckBox
+                    android:id="@+id/checkBoxMon"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:onClick="OnCheckBoxDay"
+                    android:text="월" />
+
+                <CheckBox
+                    android:id="@+id/checkBoxTue"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:onClick="OnCheckBoxDay"
+                    android:text="화" />
+
+                <CheckBox
+                    android:id="@+id/checkBoxWed"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:onClick="OnCheckBoxDay"
+                    android:text="수" />
+
+                <CheckBox
+                    android:id="@+id/checkBoxThu"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:onClick="OnCheckBoxDay"
+                    android:text="목" />
+
+                <CheckBox
+                    android:id="@+id/checkBoxFri"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:onClick="OnCheckBoxDay"
+                    android:text="금" />
+
+                <CheckBox
+                    android:id="@+id/checkBoxSat"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:onClick="OnCheckBoxDay"
+                    android:text="토" />
+
+                <CheckBox
+                    android:id="@+id/checkBoxSun"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:onClick="OnCheckBoxDay"
+                    android:text="일" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="3"
                 android:orientation="horizontal">

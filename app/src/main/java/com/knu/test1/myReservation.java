@@ -5,11 +5,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.res.ResourcesCompat;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
@@ -33,6 +35,8 @@ import java.util.TreeMap;
 
 public class myReservation extends AppCompatActivity {
 
+    public static Context MyContext;
+
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
     User user;
@@ -53,6 +57,7 @@ public class myReservation extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.my_reservation);
 
+        MyContext = this;
         startLoading();
         init();
         addManagement();
@@ -75,6 +80,23 @@ public class myReservation extends AppCompatActivity {
 
         dp = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,1,getResources().getDisplayMetrics());
         user = (User)getIntent().getSerializableExtra("user");
+        databaseReference.child("Users").child(user.userID).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                user=dataSnapshot.getValue(User.class);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    public void ReLoading(){
+        init();
+        addManagement();
+        func();
     }
 
     public void addManagement(){
@@ -129,8 +151,8 @@ public class myReservation extends AppCompatActivity {
                     String key = iter.next();
                     RData value = user.userRMap.get(key);
 
-                    long chk1 = Long.parseLong(value.endTime);
-                    long chk2 = (Long.parseLong(stringNow));
+                    long chk1 = Long.parseLong(value.endTime)/10000;
+                    long chk2 = Long.parseLong(stringNow)/10000;
 
                     if(chk1<chk2){
                         delKeyList.add(key);

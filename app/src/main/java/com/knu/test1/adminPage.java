@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -36,6 +37,8 @@ public class adminPage extends AppCompatActivity implements DatePickerDialog.OnD
     Button btnDateRangePicker;
     TextView txvStartDate, txvEndDate, editTextUserName;
     TimePicker startTimepicker, endTimepicker;
+    CheckBox checkBox103, checkBox104, checkBox106, checkBox111, checkBox413;
+    CheckBox checkBoxMon, checkBoxTue, checkBoxWed, checkBoxThu, checkBoxFri, checkBoxSat, checkBoxSun;
 
     int ny =0, nm=0, nd=0;
     String startTime, endTime;
@@ -45,13 +48,14 @@ public class adminPage extends AppCompatActivity implements DatePickerDialog.OnD
     long now = System.currentTimeMillis();
     Date date = new Date(now);
     String stringNow = sdfNow.format(date);
-    ArrayList<String> delKeyList;
     private int TIME_PICKER_INTERVAL = 30;
 
     long selectedDateStart, selectedDateEnd;
 
     int[] rooms = {103,104,106,111,413};
     boolean[] isRoomChecked={false,false,false,false,false};
+    int roomNumber;
+    boolean[] isDayChecked={false,false,false,false,false,false,false,false};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,15 +96,10 @@ public class adminPage extends AppCompatActivity implements DatePickerDialog.OnD
     public void OnCheckBoxClicked(View v){
         //boolean checked = ((CheckBox) v).isChecked();
         for(int i=0;i<5;i++) isRoomChecked[i]=false;
-        CheckBox checkBox103 = (CheckBox)findViewById(R.id.checkbox103);
         checkBox103.setChecked(false);
-        CheckBox checkBox104 = (CheckBox)findViewById(R.id.checkbox104);
         checkBox104.setChecked(false);
-        CheckBox checkBox106 = (CheckBox)findViewById(R.id.checkbox106);
         checkBox106.setChecked(false);
-        CheckBox checkBox111 = (CheckBox)findViewById(R.id.checkbox111);
         checkBox111.setChecked(false);
-        CheckBox checkBox413 = (CheckBox)findViewById(R.id.checkbox413);
         checkBox413.setChecked(false);
 
         switch(v.getId()){
@@ -128,6 +127,53 @@ public class adminPage extends AppCompatActivity implements DatePickerDialog.OnD
         }
     }
 
+    public void OnCheckBoxDay(View v){
+        switch (v.getId()){
+            case R.id.checkBoxMon:
+                if (checkBoxMon.isChecked())
+                    isDayChecked[2] = true;
+                else
+                    isDayChecked[2] = false;
+                break;
+            case R.id.checkBoxTue:
+                if (checkBoxTue.isChecked())
+                    isDayChecked[3] = true;
+                else
+                    isDayChecked[3] = false;
+                break;
+            case R.id.checkBoxWed:
+                if (checkBoxWed.isChecked())
+                    isDayChecked[4] = true;
+                else
+                    isDayChecked[4] = false;
+                break;
+            case R.id.checkBoxThu:
+                if (checkBoxThu.isChecked())
+                    isDayChecked[5] = true;
+                else
+                    isDayChecked[5] = false;
+                break;
+            case R.id.checkBoxFri:
+                if (checkBoxFri.isChecked())
+                    isDayChecked[6] = true;
+                else
+                    isDayChecked[6] = false;
+                break;
+            case R.id.checkBoxSat:
+                if (checkBoxSat.isChecked())
+                    isDayChecked[7] = true;
+                else
+                    isDayChecked[7] = false;
+                break;
+            case R.id.checkBoxSun:
+                if (checkBoxSun.isChecked())
+                    isDayChecked[1] = true;
+                else
+                    isDayChecked[1] = false;
+                break;
+        }
+    }
+
     public void init(){
         for(int i=0;i<5;i++) isRoomChecked[i] = false;
         firebaseDatabase = FirebaseDatabase.getInstance();
@@ -140,6 +186,25 @@ public class adminPage extends AppCompatActivity implements DatePickerDialog.OnD
         startTimepicker = (TimePicker)findViewById(R.id.startTimepicker);
         endTimepicker = (TimePicker)findViewById(R.id.endTimepicker);
 
+        checkBox103 = (CheckBox)findViewById(R.id.checkbox103);
+        checkBox104 = (CheckBox)findViewById(R.id.checkbox104);
+        checkBox106 = (CheckBox)findViewById(R.id.checkbox106);
+        checkBox111 = (CheckBox)findViewById(R.id.checkbox111);
+        checkBox413 = (CheckBox)findViewById(R.id.checkbox413);
+
+        checkBoxMon = (CheckBox)findViewById(R.id.checkBoxMon);
+        checkBoxTue = (CheckBox)findViewById(R.id.checkBoxTue);
+        checkBoxWed = (CheckBox)findViewById(R.id.checkBoxWed);
+        checkBoxThu = (CheckBox)findViewById(R.id.checkBoxThu);
+        checkBoxFri = (CheckBox)findViewById(R.id.checkBoxFri);
+        checkBoxSat = (CheckBox)findViewById(R.id.checkBoxSat);
+        checkBoxSun = (CheckBox)findViewById(R.id.checkBoxSun);
+
+        DateInit();
+        setinterval();
+    }
+
+    public void DateInit(){
         long longNow = Long.parseLong(stringNow);
         long y = longNow/100000000;
         long m = (longNow%100000000)/1000000;
@@ -149,8 +214,6 @@ public class adminPage extends AppCompatActivity implements DatePickerDialog.OnD
         txvEndDate.setText("To : "+ny+"/"+nm+"/"+nd);
         selectedDateStart = (longNow/10000)*10000;
         selectedDateEnd = (longNow/10000)*10000;
-
-        setinterval();
     }
 
     @Override
@@ -194,16 +257,6 @@ public class adminPage extends AppCompatActivity implements DatePickerDialog.OnD
         return Long.parseLong(sdf.format(date))*10000;
     }
 
-    String getRoomID(int idx){
-        String roomID = "103";
-        if(idx==1) roomID = "104";
-        else if(idx == 2) roomID = "106";
-        else if(idx==3) roomID = "111";
-        else if(idx==4) roomID = "413";
-        return roomID;
-    }
-
-
     public void submit(){
         if(selectedDateStart > selectedDateEnd){
             Toast.makeText(this.getApplicationContext(),"날짜 세팅 오류",Toast.LENGTH_LONG).show();
@@ -211,7 +264,6 @@ public class adminPage extends AppCompatActivity implements DatePickerDialog.OnD
         }
 
         final Vector<Long> dates = new Vector<>();
-
         long syear, smonth, sdate;
         long eyear, emonth, edate;
 
@@ -219,20 +271,9 @@ public class adminPage extends AppCompatActivity implements DatePickerDialog.OnD
         smonth = (selectedDateStart%100000000)/1000000;
         sdate = (selectedDateStart%1000000)/10000;
 
-
         eyear = selectedDateEnd/100000000;
         emonth = (selectedDateEnd%100000000)/1000000;
         edate = (selectedDateEnd%1000000)/10000;
-
-
-        Calendar calendar = Calendar.getInstance();
-        calendar.set((int)syear, (int)smonth-1, (int)sdate);
-
-        while(true){
-            dates.add(getDateByLong(calendar.getTime()));
-            calendar.add(Calendar.DATE, 7);
-            if(getDateByLong(calendar.getTime())>selectedDateEnd) break;
-        }
 
         if(editTextUserName.getText().toString().equals("")){
             Toast.makeText(this.getApplicationContext(), "이름을 입력하세요.", Toast.LENGTH_LONG).show();
@@ -243,11 +284,24 @@ public class adminPage extends AppCompatActivity implements DatePickerDialog.OnD
         for(int i=0;i<5;i++){
             if(isRoomChecked[i]){
                 isRoomSelected=true;
+                roomNumber = i;
                 break;
             }
         }
         if(!isRoomSelected){
-            Toast.makeText(this.getApplicationContext(),"선택된 방 없음.",Toast.LENGTH_LONG).show();
+            Toast.makeText(this.getApplicationContext(),"방을 하나 선택해주세요..",Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        boolean isDaySelected=false;
+        for(int i=1;i<=7;i++){
+            if(isDayChecked[i]){
+                isDaySelected=true;
+                break;
+            }
+        }
+        if(!isDaySelected){
+            Toast.makeText(this.getApplicationContext(), "요일을 선택해주세요.",Toast.LENGTH_LONG).show();
             return;
         }
 
@@ -262,7 +316,7 @@ public class adminPage extends AppCompatActivity implements DatePickerDialog.OnD
         if(tempTimeEnd % 10000 == 0) tempTimeEnd += 2400;
 
         if(tempTimeStart + 30 <= Long.parseLong(stringNow)){
-            Toast.makeText(this.getApplicationContext(),"현재 시간보다 이후로 예약을 해주십시오.",Toast.LENGTH_LONG).show();
+            Toast.makeText(this.getApplicationContext(),"현재 시간 이후로 예약을 해주십시오.",Toast.LENGTH_LONG).show();
             return;
         }
         if(tempTimeStart>=tempTimeEnd){
@@ -274,47 +328,50 @@ public class adminPage extends AppCompatActivity implements DatePickerDialog.OnD
             return;
         }
 
+        Calendar calendar = Calendar.getInstance();
+        calendar.set((int)syear, (int)smonth-1, (int)sdate);
+
+        while(true){
+            if(getDateByLong(calendar.getTime())>selectedDateEnd) break;
+            if (isDayChecked[calendar.get(Calendar.DAY_OF_WEEK)])
+                dates.add(getDateByLong(calendar.getTime()));
+            calendar.add(Calendar.DATE, 1);
+        }
+
         databaseReference.child("Users").child("110").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull final DataSnapshot dataSnapshot1) {
+                final String roomID = String.valueOf(rooms[roomNumber]);
 
-                for(int j=0;j<5;j++){
-                    if(isRoomChecked[j]){
-                        final String roomID = getRoomID(j);
+                databaseReference.child("Rooms").child(roomID).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot2) {
+                        User user = dataSnapshot1.getValue(User.class);
+                        Room room = dataSnapshot2.getValue(Room.class);
 
-                        databaseReference.child("Rooms").child(String.valueOf(rooms[j])).addListenerForSingleValueEvent(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot dataSnapshot2) {
-                                User user = dataSnapshot1.getValue(User.class);
-                                Room room = dataSnapshot2.getValue(Room.class);
+                        for(int i=0;i<dates.size();i++){
+                            Long d = dates.get(i);
+                            long stime = d+shour*100+(smin % 2==0? 0: 30);
+                            long etime = d+ehour*100+(emin % 2==0?0:30);
+                            if(stime % 10000 == 0) stime += 2400;
+                            if(etime % 10000 == 0) etime += 2400;
 
-                                for(int i=0;i<dates.size();i++){
-                                    Long d = dates.get(i);
-                                    long stime = d+shour*100+(smin % 2==0? 0: 30);
-                                    long etime = d+ehour*100+(emin % 2==0?0:30);
-                                    if(stime == 0) stime += 2400;
-                                    if(etime == 0) etime += 2400;
+                            startTime = String.valueOf(stime);
+                            endTime = String.valueOf(etime);
+                            RData rData = new RData(startTime, endTime, "110", editTextUserName.getText().toString());
+                            room.pushData(roomID, rData);
+                            user.pushData(roomID, rData);
+                        }
 
-                                    startTime = String.valueOf(stime);
-                                    endTime = String.valueOf(etime);
-                                    RData rData = new RData(startTime, endTime, "110", editTextUserName.getText().toString());
-                                    room.pushData(roomID, rData);
-                                    user.pushData(roomID, rData);
-                                }
-
-                                databaseReference.child("Rooms").child(room.roomID).setValue(room);
-                                databaseReference.child("Users").child(user.userID).setValue(user);
-                            }
-
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                            }
-                        });
-
-                        break;
+                        databaseReference.child("Rooms").child(room.roomID).setValue(room);
+                        databaseReference.child("Users").child(user.userID).setValue(user);
                     }
-                }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
             }
 
             @Override
@@ -329,7 +386,15 @@ public class adminPage extends AppCompatActivity implements DatePickerDialog.OnD
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-
+                        ((myReservation)myReservation.MyContext).ReLoading();
+                        afterSumbit();
+                    }
+                })
+                .setOnDismissListener(new DialogInterface.OnDismissListener() {
+                    @Override
+                    public void onDismiss(DialogInterface dialog) {
+                        ((myReservation)myReservation.MyContext).ReLoading();
+                        afterSumbit();
                     }
                 })
                 .show();
@@ -346,5 +411,29 @@ public class adminPage extends AppCompatActivity implements DatePickerDialog.OnD
 
         txvStartDate.setText("From : "+lys+"/"+lms+"/"+lds);
         txvEndDate.setText("To : "+lye+"/"+lme+"/"+lde);
+    }
+
+    public void afterSumbit(){
+        for(int i=0;i<5;i++)
+            isRoomChecked[i]=false;
+        checkBox103.setChecked(false);
+        checkBox104.setChecked(false);
+        checkBox106.setChecked(false);
+        checkBox111.setChecked(false);
+        checkBox413.setChecked(false);
+
+        for(int i=1;i<=7;i++)
+            isDayChecked[i] = false;
+        checkBoxMon.setChecked(false);
+        checkBoxTue.setChecked(false);
+        checkBoxWed.setChecked(false);
+        checkBoxThu.setChecked(false);
+        checkBoxFri.setChecked(false);
+        checkBoxSat.setChecked(false);
+        checkBoxSun.setChecked(false);
+
+        editTextUserName.setText("");
+        DateInit();
+        setinterval();
     }
 }
