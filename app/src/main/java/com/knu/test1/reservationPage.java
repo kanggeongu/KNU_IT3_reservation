@@ -209,7 +209,7 @@ public class reservationPage extends AppCompatActivity {
         if(etime % 10000 == 0) etime += 2400;
 
         if(stime + 30 <= Long.parseLong(stringNow)){
-            Toast.makeText(this.getApplicationContext(),"현재 시간보다 이후로 예약을 해주십시오.",Toast.LENGTH_LONG).show();
+            Toast.makeText(this.getApplicationContext(),"현재 시간 이후로 예약을 해주십시오.",Toast.LENGTH_LONG).show();
             return;
         }
         if(stime>=etime){
@@ -307,6 +307,14 @@ public class reservationPage extends AppCompatActivity {
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        ((reservationHome)reservationHome.HomeContext).onRefresh();
+                        startLoading();
+                        finish();
+                    }
+                })
+                .setOnDismissListener(new DialogInterface.OnDismissListener() {
+                    @Override
+                    public void onDismiss(DialogInterface dialog) {
                         ((reservationHome)reservationHome.HomeContext).onRefresh();
                         startLoading();
                         finish();
